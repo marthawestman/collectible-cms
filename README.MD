@@ -8,3 +8,8 @@ https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/
 ## Installation
 
 In config.js replace the tokenSignature value with a custom password.
+
+## Updating API documentation
+
+`npm apidoc install -g`
+`apidoc -i server/ -o apidoc/`
