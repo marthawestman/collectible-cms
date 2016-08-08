@@ -1,3 +1,7 @@
+# Collectible CMS
+
+A Content Management System for stamps, coins, and other collectibles.
+
 ## Requirements
 
 ### Install MongoDB

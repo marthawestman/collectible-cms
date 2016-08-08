@@ -1,6 +1,6 @@
 {
   "name": "Collectible CMS API",
   "version": "0.1.0",
-  "description": "Details on accessing the Collectible CMS API",
+  "description": "Documentation for accessing the stamp, coin, and other collectibles CMS backend",
   "sampleUrl": "http://localhost:8080"
 }
