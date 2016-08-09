@@ -1,4 +1,3 @@
-// Rename this file to config.js
 module.exports = {
     // You must change the token signature.
     'tokenSignature': 'secret',
@@ -6,4 +5,3 @@ module.exports = {
     // Local port that express should serve CollectibleCMS on.
     'port': 8080
 };
-
