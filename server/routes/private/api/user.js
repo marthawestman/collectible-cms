@@ -2,10 +2,50 @@ var User = require('../../../models/user');
 
 module.exports = function(app, router) {
     /**
-     * Get all users.
+     * @api {get} /api/user User list.
+     * @apiPermission admin
+     * @apiGroup Users
+     * @apiName List Users
+     *
+     * @apiHeader {String} x-access-token Access token recieved from /api/authenticate
+     *
+     * @apiSuccess {Boolean} status True, credentials are valid..
+     * @apiSuccess {String} message Description of success.
+     * @apiSuccess {String} data An array of user objects.
+     * @apiSuccessExample Success-Response:
+     *     {
+     *         "status": true,
+     *         "message": "",
+     *         "data": [{
+     *             "name": {
+     *                 "first": "admin",
+     *                 "middle": "",
+     *                 "last": "",
+     *                 "suffix": "",
+     *             },
+     *             "email": "admin@localhost",
+     *             "password": "password",
+     *             "roles": [
+     *                 "admin",
+     *                 "user"
+     *             ]
+     *         }]
+     *     }
+     *
+     * @apiError (Error 401) NotAuthorized The access token in 
+     *           <code>x-access-token</code> header is invalid, or
+     *           expired.
+     * @apiError (Error 403) NotAuthorized The <code>x-access-token</code>
+     *           header is missing.
+     * @apiErrorExample Error-Response:
+     *     HTTP/1.1 401 Unauthorized
+     *     {
+     *         "status": false,
+     *         "error": "NotAuthorized",
+     *         "message": "Failed to authenticate token."
+     *      }
      */
     router.get('/api/user', function(req, res) {
-        // find the user
         User.find({}, function(err, users) {
             res.json(users);
         });

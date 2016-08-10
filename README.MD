@@ -12,14 +12,14 @@ A Content Management System for stamps, coins, comic books, and other collectibl
 * `git clone https://github.com/delphian/collectible-cms.git`
 * `cd collectible-cms`
 * `npm install`
-* `cp samples/config.js.sample ./config.js`
-* `cp samples/apidoc.json.sample ./apidoc.json`
+* `cp templates/config.js.sample ./config.js`
+* `cp templates/apidoc.json.sample ./apidoc.json`
 
 Edit config.js and apidoc.js, replacing the default values with more appropriate domain specific ones. _tokenSignature in config.js must be replaced or the site will NOT be secure_.
 
 ### Create and view the documentation
 
 * `npm install apidoc -g`
-* `apidoc -i server/ -o apidoc/`
+* `apidoc -i server/ -o apidoc/ -t templates/apidoc`
 
 Visit http://localhost:8080/apidoc

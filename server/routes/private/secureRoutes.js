@@ -7,7 +7,11 @@ module.exports = function(app, router) {
         if (token) {
             jwt.verify(token, app.get('tokenSignature'), function(err, decoded) {
                 if (err) {
-                    return res.json({ success: false, message: 'Failed to authenticate token.' });
+                    return res.status(401).json({ 
+                        status: false, 
+                        error: "NotAuthorized", 
+                        message: 'Failed to authenticate token.'
+                    });
                 } else {
                     req.decoded = decoded;
                     next();
@@ -15,7 +19,8 @@ module.exports = function(app, router) {
             });
         } else {
             return res.status(403).send({
-                success: false,
+                status: false,
+                error: "NotAuthorized",
                 message: 'No token provided.'
             });
         }

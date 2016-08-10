@@ -4,17 +4,23 @@ var crypto = require('crypto');
 
 module.exports = function(app, router) {
     /**
-     * @api {post} /api/authenticate Submit valid credentials and receive an access token.
+     * @api {post} /api/authenticate Request access token.
      * @apiPermission none
      * @apiGroup Authentication
      * @apiName Authenticate
+     * @apiDescription A JSON Web Token is required to access most api
+     *                 endpoints. After authenticating with an email
+     *                 address and password a token will be provided.
+     *                 The token should be placed in a x-access-token
+     *                 header for all secured api requests.
+     * @apiHeader {String} Content-Type=application/json
      *
-     * @apiParam {String} email Email address of account requesting access token.
-     * @apiParam {String} password Password of account requesting access token.
+     * @apiParam {String} email=admin@localhost Email address of account requesting access token.
+     * @apiParam {String} password=password Password of account requesting access token.
      * @apiParamExample {json} Request-Example:
      *     {
-     *         "email": "registered.user@gmail.com",
-     *         "password": "mypassword"
+     *         "email": "admin@localhost",
+     *         "password": "password"
      *     }
      *
      * @apiSuccess {Boolean} status True, credentials are valid..
