@@ -2,15 +2,14 @@ var User = require('../../../models/user');
 
 module.exports = function(app, router) {
     /**
-     * @api {get} /api/user User list.
+     * @api {get} /api/user Read all.
      * @apiPermission admin
-     * @apiGroup Users
-     * @apiName List Users
+     * @apiGroup User
+     * @apiName ReadAll
      *
      * @apiHeader {String} x-access-token Access token recieved from /api/authenticate
      *
-     * @apiSuccess {Boolean} status True, credentials are valid..
-     * @apiSuccess {String} message Description of success.
+     * @apiSuccess {Boolean} status <code>true</code> if request is executed.
      * @apiSuccess {String} data An array of user objects.
      * @apiSuccessExample Success-Response:
      *     {
@@ -48,7 +47,10 @@ module.exports = function(app, router) {
      */
     router.get('/api/user', function(req, res) {
         User.find({}, function(err, users) {
-            res.json(users);
+            res.json({
+                "status": true,
+                "data": users
+            });
         });
     });
     /**
