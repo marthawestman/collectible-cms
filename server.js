@@ -21,13 +21,10 @@ app.use(bodyParser.json());
 app.use(morgan('dev'));
 
 app.use('/apidoc', express.static('apidoc'));
-// Routes
-app.get('/', function(req, res) {
-    res.send('Hello! The API is at http://localhost:' + port + '/api');
-});
 
+// Routes
 var router = express.Router(); 
-require('./server/routes/public/api')(app, router);
+require('./server/routes/public')(app, router);
 require('./server/routes/private/secureRoutes')(app, router);
 require('./server/routes/private/api')(app, router);
 app.use(router);

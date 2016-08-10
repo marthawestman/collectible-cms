@@ -17,6 +17,7 @@ module.exports = function(app, router) {
      *         "status": true,
      *         "message": "",
      *         "data": [{
+     *             "_id": "57aacc69fb7e90e81aa5d5d4",
      *             "name": {
      *                 "first": "admin",
      *                 "middle": "",
@@ -33,8 +34,8 @@ module.exports = function(app, router) {
      *     }
      *
      * @apiError (Error 401) NotAuthorized The access token in 
-     *           <code>x-access-token</code> header is invalid, or
-     *           expired.
+     *           <code>x-access-token</code> header is invalid, expired,
+     *           or user otherwise does not have requisite permission.
      * @apiError (Error 403) NotAuthorized The <code>x-access-token</code>
      *           header is missing.
      * @apiErrorExample Error-Response:

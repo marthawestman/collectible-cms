@@ -17,9 +17,11 @@ A Content Management System for stamps, coins, comic books, and other collectibl
 
 Edit config.js and apidoc.js, replacing the default values with more appropriate domain specific ones. _tokenSignature in config.js must be replaced or the site will NOT be secure_.
 
+By visiting http://localhost/setup the default admin user will be created. Remember these credentials.
+
 ### Create and view the documentation
 
 * `npm install apidoc -g`
 * `apidoc -i server/ -o apidoc/ -t templates/apidoc`
 
-Visit http://localhost:8080/apidoc
+Visit http://localhost:8080/apidoc and issue test API requests as desired.
