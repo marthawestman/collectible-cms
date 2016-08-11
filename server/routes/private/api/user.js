@@ -2,8 +2,8 @@ var User = require('../../../models/user');
 
 module.exports = function(app, router) {
     /**
-     * @api {get} /api/user Read all.
-     * @apiPermission admin
+     * @api {get} /api/user Read all
+     * @apiPermission Admin
      * @apiGroup User
      * @apiName ReadAll
      *

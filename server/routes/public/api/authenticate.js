@@ -4,8 +4,7 @@ var crypto = require('crypto');
 
 module.exports = function(app, router) {
     /**
-     * @api {post} /api/authenticate Request access token.
-     * @apiPermission none
+     * @api {post} /api/authenticate Request access token
      * @apiGroup Authentication
      * @apiName Authenticate
      * @apiDescription A JSON Web Token is required to access most api
@@ -13,11 +12,13 @@ module.exports = function(app, router) {
      *                 address and password a token will be provided.
      *                 The token should be placed in a x-access-token
      *                 header for all secured api requests.
+     * @apiPermission Public
+     *     
      * @apiHeader {String} Content-Type=application/json
      *
      * @apiParam {String} email=admin@localhost Email address of account requesting access token.
      * @apiParam {String} password=password Password of account requesting access token.
-     * @apiParamExample {json} Request-Example:
+     * @apiParamExample {JSON} Request-Example:
      *     {
      *         "email": "admin@localhost",
      *         "password": "password"
@@ -27,7 +28,7 @@ module.exports = function(app, router) {
      * @apiSuccess {String} message Description of success.
      * @apiSuccess {String} token The JSON Web Token which should be placed in the http header x-access-token
      *                      for subsequent authorized requests.
-     * @apiSuccessExample Success-Response:
+     * @apiSuccessExample {JSON} Success-Response:
      *     {
      *         "status": true,
      *         "message": "Enjoy your token!",
@@ -38,7 +39,7 @@ yRQYnWzskCZUxPwaQupWkiUzKELZ49eM7oWxAQK_ZXw"
      *
      * @apiError (Error 404) UserNotFound The <code>email</code> of the user was not found.
      * @apiError (Error 401) NotAuthorized The <code>password</code> for the user did not match.
-     * @apiErrorExample Error-Response:
+     * @apiErrorExample {JSON} Error-Response:
      *     HTTP/1.1 404 Not Found
      *     {
      *         "status": false,
