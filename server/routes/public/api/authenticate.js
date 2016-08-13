@@ -13,7 +13,7 @@ module.exports = function(app, router) {
      *                 The token should be placed in a x-access-token
      *                 header for all secured api requests.
      * @apiPermission Public
-     *     
+     *
      * @apiHeader {String} Content-Type=application/json
      *
      * @apiParam {String} email=admin@localhost Email address of account requesting access token.
@@ -75,7 +75,7 @@ yRQYnWzskCZUxPwaQupWkiUzKELZ49eM7oWxAQK_ZXw"
                         message: 'Enjoy your token!',
                         token: token
                     });
-                }   
+                }
             }
         });
     });

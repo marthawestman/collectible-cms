@@ -6,15 +6,13 @@ module.exports = function(app, router) {
      * @apiPermission Admin
      * @apiGroup User
      * @apiName ReadAll
-     *
-     * @apiHeader {String} x-access-token Access token recieved from /api/authenticate
-     *
-     * @apiSuccess {Boolean} status <code>true</code> if request is executed.
+     * @apiUse apiHeaderAccessToken
+     * @apiUse apiSuccessStatus
      * @apiSuccess {String} data An array of user objects.
-     * @apiSuccessExample Success-Response:
+     * @apiSuccessExample One User Found
+     *     HTTP/1.1 200 OK
      *     {
      *         "status": true,
-     *         "message": "",
      *         "data": [{
      *             "_id": "57aacc69fb7e90e81aa5d5d4",
      *             "name": {
@@ -31,52 +29,159 @@ module.exports = function(app, router) {
      *             ]
      *         }]
      *     }
-     *
-     * @apiError (Error 401) NotAuthorized The access token in 
-     *           <code>x-access-token</code> header is invalid, expired,
-     *           or user otherwise does not have requisite permission.
-     * @apiError (Error 403) NotAuthorized The <code>x-access-token</code>
-     *           header is missing.
-     * @apiErrorExample Error-Response:
-     *     HTTP/1.1 401 Unauthorized
+     * @apiSuccessExample No Users Found
+     *     HTTP/1.1 200 OK
      *     {
-     *         "status": false,
-     *         "error": "NotAuthorized",
-     *         "message": "Failed to authenticate token."
-     *      }
+     *         "status": true,
+     *         "data": []
+     *     }
+     * @apiUse apiErrorGeneric
+     * @apiUse apiErrorExampleAccessToken
+     * @apiUse apiErrorExampleNotAuthorized
      */
     router.get('/api/user', function(req, res) {
-        User.find({}, function(err, users) {
-            res.json({
-                "status": true,
-                "data": users
+        if (req.decoded.roles.indexOf("admin") == -1) {
+            res.status(401).json({
+                "status": false,
+                "error": "NotAuthorized",
+                "message": "Administrative permission is required."
             });
-        });
+        } else {
+            User.find({}, function(err, users) {
+                res.json({
+                    "status": true,
+                    "data": users
+                });
+            });
+        }
     });
     /**
-     * Get a single user record.
+     * @api {get} /api/user/:id Read single
+     * @apiPermission Admin
+     * @apiGroup User
+     * @apiName ReadSingle
+     * @apiUse apiHeaderAccessToken
+     * @apiParam {Int} id The unique user identifier.
+     * @apiUse apiSuccessStatus
+     * @apiSuccess {String} data A single user object.
+     * @apiSuccessExample User Found
+     *     HTTP/1.1 200 OK
+     *     {
+     *         "status": true,
+     *         "data": {
+     *             "_id": "57aacc69fb7e90e81aa5d5d4",
+     *             "name": {
+     *                 "first": "admin",
+     *                 "middle": "",
+     *                 "last": "",
+     *                 "suffix": "",
+     *             },
+     *             "email": "admin@localhost",
+     *             "password": "password",
+     *             "roles": [
+     *                 "admin",
+     *                 "user"
+     *             ]
+     *         }
+     *     }
+     * @apiUse apiErrorGeneric
+     * @apiUse apiErrorExampleAccessToken
+     * @apiUse apiErrorExampleNotAuthorized
+     * @apiErrorExample UserNotFound
+     *     HTTP/1.1 404 Not Found
+     *     {
+     *         "status": false,
+     *         "error": "UserNotFound"
+     *         "message": "User not found."
+     *     }
      */
     router.get('/api/user/:id', function(req, res) {
-        User.findById(req.params.id, function(err, user) {
-            if (err) {
-                res.json({ "status": false, "message": err.message });
-            } else {
-                res.json({ "status": true, "data": user });
-            }
-        });
+        if (req.decoded.roles.indexOf("admin") == -1) {
+            res.status(401).json({
+                "status": false,
+                "error": "NotAuthorized",
+                "message": "Administrative permission is required."
+            });
+        } else {
+            User.findById(req.params.id, function(err, user) {
+                if (err) {
+                    res.status(404).json({ "status": false, "message": "User not found." });
+                } else {
+                    res.json({ "status": true, "data": user });
+                }
+            });
+        }
     });
     /**
-     * Create a user record.
+     * @api {get} /api/user Create
+     * @apiPermission Admin
+     * @apiGroup User
+     * @apiName Create
+     * @apiUse apiHeaderAccessToken
+     * @apiUse apiHeaderJson
+     * @apiParamExample {JSON} Request Example
+     *     {
+     *         "name": {
+     *             "first": "John",
+     *             "middle": "",
+     *             "last": "Lee",
+     *             "suffix": "IV",
+     *         },
+     *         "email": "john.lee@localhost",
+     *         "password": "password",
+     *         "roles": [
+     *             "user"
+     *         ]
+     *     }
+     * @apiUse apiSuccessStatus
+     * @apiSuccess {String} data A single user object.
+     * @apiSuccessExample User Created
+     *     HTTP/1.1 200 OK
+     *     {
+     *         "status": true,
+     *         "data": {
+     *             "_id": "57aacc69fb7e90e81aa5d5d5",
+     *             "name": {
+     *                 "first": "John",
+     *                 "middle": "",
+     *                 "last": "Lee",
+     *                 "suffix": "IV",
+     *             },
+     *             "email": "john.lee@localhost",
+     *             "password": "password",
+     *             "roles": [
+     *                 "user"
+     *             ]
+     *         }
+     *     }
+     * @apiUse apiErrorGeneric
+     * @apiUse apiErrorExampleAccessToken
+     * @apiUse apiErrorExampleNotAuthorized
+     * @apiErrorExample User Not Created
+     *     HTTP/1.1 500 Internal Server Error
+     *     {
+     *         "status": false,
+     *         "error": "Unknown",
+     *         "message": "*A broad description of error will be provided*"
+     *     }
      */
     router.post('/api/user', function(req, res) {
-        var user = new User(req.body);
-        user.save(function(err) {
-            if (err) {
-                res.json({ "status": false, "message": err.message });
-            } else {
-                res.json({ "status": true, "data": user });
-            }
-        });
+        if (req.decoded.roles.indexOf("admin") == -1) {
+            res.status(401).json({
+                "status": false,
+                "error": "NotAuthorized",
+                "message": "Administrative permission is required."
+            });
+        } else {
+            var user = new User(req.body);
+            user.save(function(err) {
+                if (err) {
+                    res.status(500).json({ "status": false, "message": err.message });
+                } else {
+                    res.json({ "status": true, "data": user });
+                }
+            });
+        }
     });
     /**
      * Update a user record.
@@ -99,7 +204,7 @@ module.exports = function(app, router) {
                     res.json({ "status": true, "message": "Record updated." });
                 }
             });
-        }); 
+        });
     });
     /**
      * Delete a user record.
