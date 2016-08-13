@@ -1,4 +1,4 @@
 config.js
 node_modules
-apidoc
+/apidoc
 apidoc.json
