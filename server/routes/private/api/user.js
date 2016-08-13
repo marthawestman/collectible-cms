@@ -6,6 +6,7 @@ module.exports = function(app, router) {
      * @apiPermission Admin
      * @apiGroup User
      * @apiName ReadAll
+     * @apiDescription Read details for all user accounts.
      * @apiUse apiHeaderAccessToken
      * @apiUse apiSuccessStatus
      * @apiSuccess {String} data An array of user objects.
@@ -60,6 +61,7 @@ module.exports = function(app, router) {
      * @apiPermission Admin
      * @apiGroup User
      * @apiName ReadSingle
+     * @apiDescription Read details for a single user account.
      * @apiUse apiHeaderAccessToken
      * @apiParam {Int} id The unique user identifier.
      * @apiUse apiSuccessStatus
@@ -105,9 +107,16 @@ module.exports = function(app, router) {
         } else {
             User.findById(req.params.id, function(err, user) {
                 if (err) {
-                    res.status(404).json({ "status": false, "message": "User not found." });
+                    res.status(404).json({
+                        "status": false,
+                        "error": "UserNotFound",
+                        "message": "User not found."
+                    });
                 } else {
-                    res.json({ "status": true, "data": user });
+                    res.json({
+                        "status": true,
+                        "data": user
+                    });
                 }
             });
         }
@@ -117,6 +126,9 @@ module.exports = function(app, router) {
      * @apiPermission Admin
      * @apiGroup User
      * @apiName Create
+     * @apiDescription Create an authenticated user account. A potential user's
+     *                 email address must be verified before granted them a
+     *                 user record.
      * @apiUse apiHeaderAccessToken
      * @apiUse apiHeaderJson
      * @apiParamExample {JSON} Request Example
@@ -157,13 +169,7 @@ module.exports = function(app, router) {
      * @apiUse apiErrorGeneric
      * @apiUse apiErrorExampleAccessToken
      * @apiUse apiErrorExampleNotAuthorized
-     * @apiErrorExample User Not Created
-     *     HTTP/1.1 500 Internal Server Error
-     *     {
-     *         "status": false,
-     *         "error": "Unknown",
-     *         "message": "*A broad description of error will be provided*"
-     *     }
+     * @apiUse apiErrorExampleFailure
      */
     router.post('/api/user', function(req, res) {
         if (req.decoded.roles.indexOf("admin") == -1) {
@@ -176,35 +182,121 @@ module.exports = function(app, router) {
             var user = new User(req.body);
             user.save(function(err) {
                 if (err) {
-                    res.status(500).json({ "status": false, "message": err.message });
+                    res.status(500).json({
+                        "status": false,
+                        "message": err.message
+                    });
                 } else {
-                    res.json({ "status": true, "data": user });
+                    res.json({
+                        "status": true,
+                        "data": user
+                    });
                 }
             });
         }
     });
     /**
-     * Update a user record.
-     *
-     * Because this is a patch only the fields to change need to be sent via json.
+     * @api {patch} /api/user/:id Update
+     * @apiPermission Admin
+     * @apiPermission User
+     * @apiGroup User
+     * @apiName Update
+     * @apiDescription A role of <code>Admin</code> may update any user object.
+     *                 A role of <code>User</code> may only update their own
+     *                 record. Because this is a patch, and not a post, only
+     *                 the fields to change need to be included in json body.
+     * @apiUse apiHeaderAccessToken
+     * @apiUse apiHeaderJson
+     * @apiParam {Int} id The unique identifier for user to update.
+     * @apiParamExample {JSON} Update Full Record
+     *     {
+     *         "name": {
+     *             "first": "John 2",
+     *             "middle": "",
+     *             "last": "Lee",
+     *             "suffix": "IV",
+     *         },
+     *         "email": "john.lee@localhost",
+     *         "password": "password",
+     *         "roles": [
+     *             "user"
+     *         ]
+     *     }
+     * @apiParamExample {JSON} Update Partial Record
+     *     {
+     *         "name": {
+     *             "first": "John 2",
+     *         }
+     *     }
+     * @apiUse apiSuccessStatus
+     * @apiSuccess {String} data A single user object.
+     * @apiSuccessExample User Updated
+     *     HTTP/1.1 200 OK
+     *     {
+     *         "status": true,
+     *         "data": {
+     *             "_id": "57aacc69fb7e90e81aa5d5d5",
+     *             "name": {
+     *                 "first": "John 2",
+     *                 "middle": "",
+     *                 "last": "Lee",
+     *                 "suffix": "IV",
+     *             },
+     *             "email": "john.lee@localhost",
+     *             "password": "password",
+     *             "roles": [
+     *                 "user"
+     *             ]
+     *         }
+     *     }
+     * @apiUse apiErrorGeneric
+     * @apiUse apiErrorExampleAccessToken
+     * @apiUse apiErrorExampleNotAuthorized
+     * @apiUse apiErrorExampleFailure
+     * @apiErrorExample UserNotFound
+     *     HTTP/1.1 404 Not Found
+     *     {
+     *         "status": false,
+     *         "error": "UserNotFound"
+     *         "message": "User not found."
+     *     }
      */
     router.patch('/api/user/:id', function(req, res) {
         if ((req.params.id != req.decoded._id) && (req.decoded.roles.indexOf('admin') == -1)) {
-            res.json({ "status": false, "message": "Not authorized." });
-        }
-        var userPatch = req.body;
-        User.findById(req.params.id, function(err, user) {
-            if (userPatch.name != null && userPatch.name.first != null) {
-                user.name.first = userPatch.name.first;
-            }
-            user.save(function(err) {
-                if (err) {
-                    res.json({ "status": false, "message": err.message });
-                } else {
-                    res.json({ "status": true, "message": "Record updated." });
-                }
+            res.status(401).json({
+                "status": false,
+                "error": "NotAuthorized",
+                "message": "You do not have permission to update this record."
             });
-        });
+        } else {
+            var userPatch = req.body;
+            User.findById(req.params.id, function(err, user) {
+                if (err) {
+                    res.status(404).json({
+                        "status": false,
+                        "error": "UserNotFound",
+                        "message": err.message
+                    });
+                }
+                if (userPatch.name != null && userPatch.name.first != null) {
+                    user.name.first = userPatch.name.first;
+                }
+                user.save(function(err) {
+                    if (err) {
+                        res.status(500).json({
+                            "status": false,
+                            "error": "Unknown",
+                            "message": err.message
+                        });
+                    } else {
+                        res.json({
+                            "status": true,
+                            "data": user
+                        });
+                    }
+                });
+            });
+        }
     });
     /**
      * Delete a user record.

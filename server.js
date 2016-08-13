@@ -7,7 +7,7 @@ var mongoose   = require('mongoose');
 var jwt        = require('jsonwebtoken'); // used to create, sign, and verify tokens
 var config     = require('./config'); // get our config file
 var User       = require('./server/models/user'); // get our mongoose model
-    
+
 // Configuration.
 var port = config.port;
 mongoose.connect(config.database);
@@ -23,10 +23,8 @@ app.use(morgan('dev'));
 app.use('/apidoc', express.static('apidoc'));
 
 // Routes
-var router = express.Router(); 
-require('./server/routes/public')(app, router);
-require('./server/routes/private/secureRoutes')(app, router);
-require('./server/routes/private/api')(app, router);
+var router = express.Router();
+require('./server/routes/')(app, router);
 app.use(router);
 
 // Start the server

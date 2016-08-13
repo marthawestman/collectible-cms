@@ -260,8 +260,29 @@
         {{/if}}
       {{/if}}
 
+      {{#if article.parameter}}
+        {{#if article.parameter.fields}}
+          <h3>{{__ "Parameters"}}</h3>
+          {{#each article.parameter.fields}}
+            <h4><input type="radio" data-sample-request-param-group-id="sample-request-param-{{@index}}"  name="{{../id}}-sample-request-param" value="{{@index}}" class="sample-request-param sample-request-switch"{{#if_eq @index compare=0}} checked{{/if_eq}}> {{@key}}</h4>
+            <div class="{{../id}}-sample-request-param-fields{{#if_gt @index compare=0}} hide{{/if_gt}}">
+            {{#each this}}
+            <div class="control-group">
+              <label class="control-label" for="sample-request-param-field-{{field}}">{{field}}</label>
+              <div class="controls">
+                <div class="input-append">>
+                  <input type="text" placeholder="{{field}}" class="input-xxlarge sample-request-param" data-sample-request-param-name="{{field}}" data-sample-request-param-group="sample-request-param-{{@../index}}">
+                  <span class="add-on">{{{type}}}</span>
+                </div>
+              </div>
+            </div>
+            {{/each}}
+            </div>
+          {{/each}}
+        {{/if}}
+      {{/if}}
       {{#if_header "application/json" article.header.fields.Header}}
-        <h3>{{__ "Parameters"}}</h3>
+        <h3>JSON Body</h3>
         <div class="control-group">
           <label class="control-label" for="sample-request-param-field-json">JSON Body </label>
           <div class="controls">
@@ -271,29 +292,8 @@
             </div>
           </div>
         </div>
-      {{else}}
-        {{#if article.parameter}}
-          {{#if article.parameter.fields}}
-            <h3>{{__ "Parameters"}}</h3>
-            {{#each article.parameter.fields}}
-              <h4><input type="radio" data-sample-request-param-group-id="sample-request-param-{{@index}}"  name="{{../id}}-sample-request-param" value="{{@index}}" class="sample-request-param sample-request-switch"{{#if_eq @index compare=0}} checked{{/if_eq}}> {{@key}}</h4>
-              <div class="{{../id}}-sample-request-param-fields{{#if_gt @index compare=0}} hide{{/if_gt}}">
-              {{#each this}}
-              <div class="control-group">
-                <label class="control-label" for="sample-request-param-field-{{field}}">{{field}}</label>
-                <div class="controls">
-                  <div class="input-append">>
-                    <input type="text" placeholder="{{field}}" class="input-xxlarge sample-request-param" data-sample-request-param-name="{{field}}" data-sample-request-param-group="sample-request-param-{{@../index}}">
-                    <span class="add-on">{{{type}}}</span>
-                  </div>
-                </div>
-              </div>
-              {{/each}}
-              </div>
-            {{/each}}
-          {{/if}}
-        {{/if}}
       {{/if_header}}
+
 
           <div class="control-group">
             <div class="controls">

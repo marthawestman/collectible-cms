@@ -13,38 +13,37 @@ module.exports = function(app, router) {
      *                 The token should be placed in a x-access-token
      *                 header for all secured api requests.
      * @apiPermission Public
-     *
      * @apiHeader {String} Content-Type=application/json
-     *
-     * @apiParam {String} email=admin@localhost Email address of account requesting access token.
-     * @apiParam {String} password=password Password of account requesting access token.
-     * @apiParamExample {JSON} Request-Example:
+     * @apiParamExample {JSON} Request Example
      *     {
      *         "email": "admin@localhost",
      *         "password": "password"
      *     }
-     *
-     * @apiSuccess {Boolean} status True, credentials are valid..
-     * @apiSuccess {String} message Description of success.
+     * @apiUse apiSuccessStatus
+     * @apiSuccess {String} token An array of user objects.
      * @apiSuccess {String} token The JSON Web Token which should be placed in the http header x-access-token
      *                      for subsequent authorized requests.
-     * @apiSuccessExample {JSON} Success-Response:
+     * @apiSuccessExample {JSON} Token Granted
      *     {
      *         "status": true,
-     *         "message": "Enjoy your token!",
      *         "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
-eyJpc3MiOiJ0b3B0YWwuY29tIiwiZXhwIjoxNDI2NDIwODAwLCJodHRwOi8vdG9wdGFsLmNvbS9qd3RfY2xhaW1zL2lzX2FkbWluIjp0cnVlLCJjb21wYW55IjoiVG9wdGFsIiwiYXdlc29tZSI6dHJ1ZX0.
+eyJpc3MiOiJ0b3B0YWwuY29tIiwiZXhwIjoxNDI2NDIwODAwLCJodHRwOi8vdG9.
 yRQYnWzskCZUxPwaQupWkiUzKELZ49eM7oWxAQK_ZXw"
      *     }
-     *
-     * @apiError (Error 404) UserNotFound The <code>email</code> of the user was not found.
-     * @apiError (Error 401) NotAuthorized The <code>password</code> for the user did not match.
-     * @apiErrorExample {JSON} Error-Response:
+     * @apiUse apiErrorGeneric
+     * @apiErrorExample {JSON} User Not Found
      *     HTTP/1.1 404 Not Found
      *     {
      *         "status": false,
      *         "error": "UserNotFound",
      *         "message": "Authentication failed. User not found."
+     *      }
+     * @apiErrorExample {JSON} Invalid Credentials
+     *     HTTP/1.1 401 Not Found
+     *     {
+     *         "status": false,
+     *         "error": "NotAuthorized",
+     *         "message": "The password for the user was incorrect."
      *      }
      */
     router.post('/api/authenticate', function(req, res) {
