@@ -1,15 +1,15 @@
 var fs = require('fs');
 
 /**
- * @apiDefine Admin Admin
+ * @apiDefine apiPermissionAdmin Admin
  * The request must authenticate the user with a json web token. The user must have a role of "admin".
  */
 /**
- * @apiDefine User User
+ * @apiDefine apiPermissionUser User
  * The request must authenticate the user with a json web token. The user must have a role of "user".
  */
 /**
- * @apiDefine Public Public
+ * @apiDefine apiPermissionPublic Public
  * The request may be anonymous. No user role is required.
  */
 

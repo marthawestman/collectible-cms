@@ -1,10 +1,45 @@
+/**
+ * @apiDefine apiGroupUser User
+ *
+ * A potential user's email address should be verified before granting them a user record.
+ *
+ * <h4>User Object</h4>
+ * <pre>
+ * {<br />
+ *     "_id": "57aacc69fb7e90e81aa5d5d4",<br />
+ *     "name": {<br />
+ *         "first": "admin",<br />
+ *         "middle": "",<br />
+ *         "last": "",<br />
+ *         "suffix": "",<br />
+ *     },<br />
+ *     "email": "admin@localhost",<br />
+ *     "password": "password",<br />
+ *     "roles": [<br />
+ *         "admin",<br />
+ *         "user"<br />
+ *     ]<br />
+ * }
+ * </pre>
+ */
+
+/**
+ * @apiDefine apiErrorExampleUserNotFound
+ * @apiErrorExample UserNotFound
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *         "status": false,
+ *         "error": "UserNotFound"
+ *     }
+ */
+
 var User = require('../../../models/user');
 
 module.exports = function(app, router) {
     /**
      * @api {get} /api/user Read all
-     * @apiPermission Admin
-     * @apiGroup User
+     * @apiPermission apiPermissionAdmin
+     * @apiGroup apiGroupUser
      * @apiName ReadAll
      * @apiDescription Read details for all user accounts.
      * @apiUse apiHeaderAccessToken
@@ -58,8 +93,8 @@ module.exports = function(app, router) {
     });
     /**
      * @api {get} /api/user/:id Read single
-     * @apiPermission Admin
-     * @apiGroup User
+     * @apiPermission apiPermissionAdmin
+     * @apiGroup apiGroupUser
      * @apiName ReadSingle
      * @apiDescription Read details for a single user account.
      * @apiUse apiHeaderAccessToken
@@ -89,13 +124,7 @@ module.exports = function(app, router) {
      * @apiUse apiErrorGeneric
      * @apiUse apiErrorExampleAccessToken
      * @apiUse apiErrorExampleNotAuthorized
-     * @apiErrorExample UserNotFound
-     *     HTTP/1.1 404 Not Found
-     *     {
-     *         "status": false,
-     *         "error": "UserNotFound"
-     *         "message": "User not found."
-     *     }
+     * @apiUse apiErrorExampleUserNotFound
      */
     router.get('/api/user/:id', function(req, res) {
         if (req.decoded.roles.indexOf("admin") == -1) {
@@ -110,7 +139,6 @@ module.exports = function(app, router) {
                     res.status(404).json({
                         "status": false,
                         "error": "UserNotFound",
-                        "message": "User not found."
                     });
                 } else {
                     res.json({
@@ -123,11 +151,11 @@ module.exports = function(app, router) {
     });
     /**
      * @api {get} /api/user Create
-     * @apiPermission Admin
-     * @apiGroup User
+     * @apiPermission apiPermissionAdmin
+     * @apiGroup apiGroupUser
      * @apiName Create
      * @apiDescription Create an authenticated user account. A potential user's
-     *                 email address must be verified before granted them a
+     *                 email address must be verified before granting them a
      *                 user record.
      * @apiUse apiHeaderAccessToken
      * @apiUse apiHeaderJson
@@ -197,9 +225,9 @@ module.exports = function(app, router) {
     });
     /**
      * @api {patch} /api/user/:id Update
-     * @apiPermission Admin
+     * @apiPermission apiPermissionAdmin
      * @apiPermission User
-     * @apiGroup User
+     * @apiGroup apiGroupUser
      * @apiName Update
      * @apiDescription A role of <code>Admin</code> may update any user object.
      *                 A role of <code>User</code> may only update their own
@@ -253,20 +281,14 @@ module.exports = function(app, router) {
      * @apiUse apiErrorExampleAccessToken
      * @apiUse apiErrorExampleNotAuthorized
      * @apiUse apiErrorExampleFailure
-     * @apiErrorExample UserNotFound
-     *     HTTP/1.1 404 Not Found
-     *     {
-     *         "status": false,
-     *         "error": "UserNotFound"
-     *         "message": "User not found."
-     *     }
+     * @apiUse apiErrorExampleUserNotFound
      */
     router.patch('/api/user/:id', function(req, res) {
         if ((req.params.id != req.decoded._id) && (req.decoded.roles.indexOf('admin') == -1)) {
             res.status(401).json({
                 "status": false,
                 "error": "NotAuthorized",
-                "message": "You do not have permission to update this record."
+                "message": "You do not have permission to operate on this record."
             });
         } else {
             var userPatch = req.body;
@@ -299,17 +321,57 @@ module.exports = function(app, router) {
         }
     });
     /**
-     * Delete a user record.
+     * @api {delete} /api/user/:id Delete
+     * @apiPermission apiPermissionAdmin
+     * @apiPermission apiPermissionUser
+     * @apiGroup apiGroupUser
+     * @apiName Delete
+     * @apiDescription A role of <code>Admin</code> may delete any user object.
+     *                 A role of <code>User</code> may only delete their own
+     *                 object.
+     * @apiUse apiHeaderAccessToken
+     * @apiParam {Int} id The unique identifier for user to delete.
+     * @apiUse apiSuccessStatus
+     * @apiSuccessExample User Removed
+     *     HTTP/1.1 200 OK
+     *     {
+     *         "status": true,
+     *     }
+     * @apiUse apiErrorGeneric
+     * @apiUse apiErrorExampleAccessToken
+     * @apiUse apiErrorExampleNotAuthorized
+     * @apiUse apiErrorExampleFailure
+     * @apiUse apiErrorExampleUserNotFound
      */
     router.delete('/api/user/:id', function(req, res) {
         if (req.decoded.roles == null || req.decoded.roles.indexOf('admin') == -1) {
-            res.json({ "status": false, "message": "Not authorized." });
+            res.status(401).json({
+                "status": false,
+                "error": "NotAuthorized",
+                "message": "You do not have permission to operate on this record."
+            });
         } else {
-            User.findByIdAndRemove(req.params.id, function(err, offer) {
+            User.findById(req.params.id, function(err, user) {
                 if (err) {
-                    res.json({ "status": false, "message": err.message });
+                    res.status(404).json({
+                        "status": false,
+                        "error": "UserNotFound",
+                        "message": err.message
+                    });
                 } else {
-                    res.json({ "status": true, "message": "Removed." });
+                    User.findByIdAndRemove(req.params.id, function(err, user) {
+                        if (err) {
+                            res.status(500).json({
+                                "status": false,
+                                "error": "Unknown",
+                                "message": err.message
+                            });
+                        } else {
+                            res.json({
+                                "status": true,
+                            });
+                        }
+                    });
                 }
             });
         }
