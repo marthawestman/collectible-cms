@@ -6,7 +6,12 @@ var morgan     = require('morgan');
 var mongoose   = require('mongoose');
 var jwt        = require('jsonwebtoken'); // used to create, sign, and verify tokens
 var config     = require('./config'); // get our config file
-var User       = require('./server/models/user'); // get our mongoose model
+
+// Should we put these into app.set for a poor man's dependency injection?
+var User              = require('./server/models/user');
+var CatalogueStampist = require('./server/models/stamps/catalogueStampist');
+var CatalogueScott    = require('./server/models/stamps/catalogueScott');
+var Stamp             = require('./server/models/stamps/stamp');
 
 // Configuration.
 var port = config.port;
