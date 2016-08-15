@@ -1,17 +1,34 @@
-var User = require('../../../models/user');
+/**
+ * @apiDefine apiGroupAuthentication Authentication
+ *
+ * A JSON Web Token is required to access most api endpoints. The token should
+ * be placed in a x-access-token header for all secured api requests.
+ *
+ * If during a request the token is malformed or expired a 403 <code>BadToken</code>
+ * response will be sent.
+ *
+ * <h4 id="badTokenResponse" class="object-anchor">Bad Token Response</h4>
+ * <pre>
+ * Error 403: Forbidden<br />
+ * {<br />
+ *     "status": false,<br />
+ *     "error": "BadToken",<br />
+ *     "message": "invalid token"<br />
+ * }
+ * </pre>
+ */
+
+var User = require('../../models/user');
 var jwt  = require('jsonwebtoken');
 var crypto = require('crypto');
 
 module.exports = function(app, router) {
     /**
      * @api {post} /api/authenticate Request access token
-     * @apiGroup Authentication
+     * @apiGroup apiGroupAuthentication
      * @apiName Authenticate
-     * @apiDescription A JSON Web Token is required to access most api
-     *                 endpoints. After authenticating with an email
-     *                 address and password a token will be provided.
-     *                 The token should be placed in a x-access-token
-     *                 header for all secured api requests.
+     * @apiDescription After authenticating with an email address and password
+     *                 a token will be provided.
      * @apiPermission Public
      * @apiHeader {String} Content-Type=application/json
      * @apiParamExample {JSON} Request Example

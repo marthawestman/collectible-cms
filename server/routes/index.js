@@ -1,4 +1,5 @@
 var fs = require('fs');
+var jwt  = require('jsonwebtoken');
 
 /**
  * @apiDefine apiPermissionAdmin Admin
@@ -61,17 +62,73 @@ var fs = require('fs');
  *     }
  */
 /**
+ * @apiDefine apiErrorExampleNotFound
+ * @apiErrorExample NotFound
+ *     HTTP/1.1 401 Not Found
+ *     {
+ *         "status": false,
+ *         "error": "NotFound",
+ *         "message": "The requested item can not be located."
+ *     }
+ */
+/**
  * @apiDefine apiErrorExampleFailure
  * @apiErrorExample Failure
  *     HTTP/1.1 500 Internal Server Error
  *     {
  *         "status": false,
- *         "error": "ReqFailed",
+ *         "error": "Failure",
  *         "message": "*A generic description of error will be provided*"
  *     }
  */
 
 module.exports = function(app, router) {
+    // Secure following routes with token.
+    router.use(function(req, res, next) {
+        var token = req.body.token || req.query.token || req.headers['x-access-token'];
+        // Add common API responses.
+        res.notAuthorized = function() {
+            this.status(401).json({
+                "status": false,
+                "error": "NotAuthorized",
+                "message": "Current user does not posses correct authorization role."
+            });
+        };
+        res.notFound = function() {
+            this.status(404).json({
+                "status": false,
+                "error": "NotFound",
+                "message": "The requested item could not be located."
+            });
+        };
+        res.failure = function(err) {
+            this.status(500).json({
+                "status": false,
+                "error": "Failure",
+                "message": err.message
+            });
+        };
+        if (token) {
+            jwt.verify(token, app.get('tokenSignature'), function(err, decoded) {
+            	if (err) {
+            		res.status(403).json({
+            			"status": false,
+            			"error": "BadToken",
+            			"message": err.message
+            		});
+            	} else {
+                    req.decoded = decoded;
+            	}
+                next();
+            });
+        } else {
+            req.decoded = {
+                "_id": 0,
+                "roles": [ "anonymous" ]
+            }
+            next();
+        }
+    });
     // Include all files and sub-directories.
     fs.readdirSync(__dirname).forEach(function(file) {
         if (file == 'index.js') return;

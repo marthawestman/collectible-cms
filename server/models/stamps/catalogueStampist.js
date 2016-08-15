@@ -28,7 +28,7 @@ var catalogueStampistSchema = new Schema({
     // Description of stamp.
     description: String,
     // Url of image.
-    image: String
+    image: [String]
 });
 
 module.exports = mongoose.model('CatalogueStampist', catalogueStampistSchema);

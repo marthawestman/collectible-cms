@@ -3,7 +3,7 @@
  *
  * A potential user's email address should be verified before granting them a user record.
  *
- * <h4>User Object</h4>
+ * <h4 id="userObject" class="object-anchor">User Object</h4>
  * <pre>
  * {<br />
  *     "_id": "57aacc69fb7e90e81aa5d5d4",<br />
@@ -33,7 +33,7 @@
  *     }
  */
 
-var User = require('../../../models/user');
+var User = require('../../models/user');
 
 module.exports = function(app, router) {
     /**

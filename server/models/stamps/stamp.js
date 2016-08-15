@@ -1,8 +1,6 @@
 // Get an instance of mongoose and mongoose.Schema
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var CatalogueStampist = require('./catalogueStampist');
-var CatalogueScott = require('./catalogueScott');
 
 // Set up a mongoose model and pass it using module.exports
 var stampSchema = new Schema({
@@ -13,7 +11,7 @@ var stampSchema = new Schema({
     // Description of stamp.
     description: String,
     // Url of image.
-    image: String,
+    image: [String],
     // How long this stamp was held.
     aquired: {
         // Date stamp was first aquired.
