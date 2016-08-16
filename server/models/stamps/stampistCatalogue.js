@@ -4,7 +4,7 @@ var crypto = require('crypto');
 var Schema = mongoose.Schema;
 
 // Set up a mongoose model and pass it using module.exports
-var catalogueStampistSchema = new Schema({
+var stampistCatalogueSchema = new Schema({
     // Unique universal id of stamp.
     _id: String,
     // Country code of issue.
@@ -31,4 +31,4 @@ var catalogueStampistSchema = new Schema({
     image: [String]
 });
 
-module.exports = mongoose.model('CatalogueStampist', catalogueStampistSchema);
+module.exports = mongoose.model('StampistCatalogue', stampistCatalogueSchema);

@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 // Set up a mongoose model and pass it using module.exports
-var catalogueScottSchema = new Schema({
+var ScottCatalogueSchema = new Schema({
     // Scott catalogue number.
     _id: String,
     // Date of issue.
@@ -24,4 +24,4 @@ var catalogueScottSchema = new Schema({
     image: [String]
 });
 
-module.exports = mongoose.model('CatalogueScott', catalogueScottSchema);
+module.exports = mongoose.model('ScottCatalogue', ScottCatalogueSchema);

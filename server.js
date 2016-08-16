@@ -8,10 +8,11 @@ var jwt        = require('jsonwebtoken'); // used to create, sign, and verify to
 var config     = require('./config'); // get our config file
 
 // Should we put these into app.set for a poor man's dependency injection?
-var User              = require('./server/models/user');
-var CatalogueStampist = require('./server/models/stamps/catalogueStampist');
-var CatalogueScott    = require('./server/models/stamps/catalogueScott');
-var Stamp             = require('./server/models/stamps/stamp');
+var User                = require('./server/models/user');
+var Collectible         = require('./server/models/collectible');
+var StampistCatalogue   = require('./server/models/stamps/stampistCatalogue');
+var StampistCollectible = require('./server/models/stamps/stampistCollectible');
+var ScottCatalogue      = require('./server/models/stamps/scottCatalogue');
 
 // Configuration.
 var port = config.port;

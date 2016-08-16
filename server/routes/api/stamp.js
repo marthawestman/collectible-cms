@@ -1,36 +1,35 @@
 /**
- * @apiDefine apiGroupStamp Stamp
+ * @apiDefine apiGroupCollectible Collectible
  *
- * A user account must exist before creating stamps is allowed. Individual stamps do not require
- * a catalogue or classification system. Associating a stamp with a catalogue system is purely
- * optional.
+ * A collectible is an individual item that has been collected, such as a stamp or coin. A user
+ * account must exist before creating collectibles is allowed. An individual collectible does not require
+ * a catalogue or classification system. A collectible, with a name and an image of a stamp, may be
+ * created without expressly catagorizing the collectible as a stamp. Context of what an item is may
+ * only be obtained by associating the collectible with a record in a catalogue (such as the
+ * StampistCatalogue or ScottCatalogue).
  *
- * <h4 id="stampObject" class="object-anchor">Stamp Object</h4>
+ * This allows a user to quickly create several records of items thaty have collected without the
+ * requirement to search for it's appropriate catalogue entry or classification.
+ *
+ * <h4 id="collectibleObject" class="object-anchor">Collectible Object</h4>
  * <pre>
  * {<br />
- *     // User that owns the stamp.<br />
- *     user: { type: Schema.Types.ObjectId, ref: 'User' },<br />
- *     // Title or short name of stamp.<br />
+ *     // User that owns the item.<br />
+ *     userId: { type: Schema.Types.ObjectId, ref: 'User' },<br />
+ *     // Title or short name of item.<br />
  *     name: String,<br />
- *     // Description of stamp.<br />
+ *     // Description of item.<br />
  *     description: String,<br />
- *     // Url of image.<br />
+ *     // Urls of image.<br />
  *     image: [String],<br />
- *     // How long this stamp was held.<br />
+ *     // How long this item was held.<br />
  *     aquired: {<br />
- *         // Date stamp was first aquired.<br />
+ *         // Date item was first aquired.<br />
  *         from: Date,<br />
- *         // Date stamp was released.<br />
+ *         // Date item was released.<br />
  *         to: Date,<br />
- *         // Details of stamp acquisition and release.<br />
+ *         // Details of item acquisition and release.<br />
  *         description: String<br />
- *     },<br />
- *     // Catalogues<br />
- *     catalogue: {<br />
- *         // Stampist catalogue reference.<br />
- *         stampist: { type: Schema.Types.ObjectId, ref: 'CatalogueStampist' },<br />
- *         // Scott catalogue reference.<br />
- *         scott: { type: Schema.Types.ObjectId, ref: 'CatalogueScott' }<br />
  *     },<br />
  *     // Meta information.<br />
  *     meta: {<br />
@@ -42,27 +41,27 @@
  */
 
 var User = require('../../models/user');
-var Stamp = require('../../models/stamps/stamp');
+var Collectible = require('../../models/collectible');
 
 module.exports = function(app, router) {
     /**
      * @api {get} /api/stamp Read all
      * @apiPermission apiPermissionAdmin
-     * @apiGroup apiGroupStamp
+     * @apiGroup apiGroupCollectible
      * @apiName ReadAll
-     * @apiDescription Read details for all stamps.
+     * @apiDescription Read details for all collectibles.
      * @apiUse apiHeaderAccessToken
      * @apiUse apiSuccessStatus
-     * @apiSuccess {Array} data An array of stamp objects.
-     * @apiSuccessExample One Stamp Found
+     * @apiSuccess {Array} data An array of collectible objects.
+     * @apiSuccessExample One Collectible Found
      *     HTTP/1.1 200 OK
      *     {
      *         "status": true,
      *         "data": [
-     *             <a href="#stampObject" class="object-link">Stamp Object</a>
+     *             <a href="#collectibleObject" class="object-link">Collectible Object</a>
      *         ]
      *     }
-     * @apiSuccessExample No Stamps Found
+     * @apiSuccessExample No Collectibles Found
      *     HTTP/1.1 200 OK
      *     {
      *         "status": true,
@@ -72,17 +71,17 @@ module.exports = function(app, router) {
      * @apiUse apiErrorExampleNotAuthorized
      * @apiUse apiErrorExampleFailure
      */
-    router.get('/api/stamp', function(req, res) {
+    router.get('/api/collectible', function(req, res) {
         if (req.decoded.roles.indexOf("admin") == -1) {
             res.notAuthorized()
         } else {
-            Stamp.find({}, function(err, stamps) {
+            Collectible.find({}, function(err, collectibles) {
                 if (err) {
                     res.unknown(err);
                 } else {
                     res.json({
                         "status": true,
-                        "data": stamps
+                        "data": collectibles
                     });
                 }
             });
