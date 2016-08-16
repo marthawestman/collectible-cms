@@ -5,13 +5,13 @@ var Schema = mongoose.Schema;
 // Set up a mongoose model and pass it using module.exports
 var collectibleSchema = new Schema({
     // User that owns the item.
-    user: { type: Schema.Types.ObjectId, ref: 'User' },
+    userId: { type: Schema.Types.ObjectId, ref: 'User' },
     // Title or short name of item.
     name: String,
     // Description of item.
     description: String,
     // Urls of image.
-    image: [String],
+    images: [String],
     // How long this item was held.
     aquired: {
         // Date item was first aquired.

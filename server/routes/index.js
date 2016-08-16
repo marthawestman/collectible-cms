@@ -1,5 +1,6 @@
 var fs = require('fs');
 var jwt  = require('jsonwebtoken');
+var User = require('../models/user');
 
 /**
  * @apiDefine apiPermissionAdmin Admin
@@ -117,15 +118,15 @@ module.exports = function(app, router) {
             			"message": err.message
             		});
             	} else {
-                    req.decoded = decoded;
+                    req.user = new User(decoded);
             	}
                 next();
             });
         } else {
-            req.decoded = {
+            req.user = new User({
                 "_id": 0,
                 "roles": [ "anonymous" ]
-            }
+            });
             next();
         }
     });

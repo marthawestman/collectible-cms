@@ -76,12 +76,8 @@ module.exports = function(app, router) {
      * @apiUse apiErrorExampleNotAuthorized
      */
     router.get('/api/user', function(req, res) {
-        if (req.decoded.roles.indexOf("admin") == -1) {
-            res.status(401).json({
-                "status": false,
-                "error": "NotAuthorized",
-                "message": "Administrative permission is required."
-            });
+        if (!req.user.isAdmin()) {
+            res.notAuthorized();
         } else {
             User.find({}, function(err, users) {
                 res.json({
@@ -127,19 +123,12 @@ module.exports = function(app, router) {
      * @apiUse apiErrorExampleUserNotFound
      */
     router.get('/api/user/:id', function(req, res) {
-        if (req.decoded.roles.indexOf("admin") == -1) {
-            res.status(401).json({
-                "status": false,
-                "error": "NotAuthorized",
-                "message": "Administrative permission is required."
-            });
+        if (!req.user.isAdmin()) {
+            res.notAuthorized();
         } else {
             User.findById(req.params.id, function(err, user) {
                 if (err) {
-                    res.status(404).json({
-                        "status": false,
-                        "error": "UserNotFound",
-                    });
+                    req.notFound();
                 } else {
                     res.json({
                         "status": true,
@@ -150,7 +139,7 @@ module.exports = function(app, router) {
         }
     });
     /**
-     * @api {get} /api/user Create
+     * @api {post} /api/user Create
      * @apiPermission apiPermissionAdmin
      * @apiGroup apiGroupUser
      * @apiName Create
@@ -200,20 +189,13 @@ module.exports = function(app, router) {
      * @apiUse apiErrorExampleFailure
      */
     router.post('/api/user', function(req, res) {
-        if (req.decoded.roles.indexOf("admin") == -1) {
-            res.status(401).json({
-                "status": false,
-                "error": "NotAuthorized",
-                "message": "Administrative permission is required."
-            });
+        if (!req.user.isAdmin()) {
+            res.notAuthorized();
         } else {
             var user = new User(req.body);
             user.save(function(err) {
                 if (err) {
-                    res.status(500).json({
-                        "status": false,
-                        "message": err.message
-                    });
+                    res.failure(err);
                 } else {
                     res.json({
                         "status": true,
@@ -284,32 +266,20 @@ module.exports = function(app, router) {
      * @apiUse apiErrorExampleUserNotFound
      */
     router.patch('/api/user/:id', function(req, res) {
-        if ((req.params.id != req.decoded._id) && (req.decoded.roles.indexOf('admin') == -1)) {
-            res.status(401).json({
-                "status": false,
-                "error": "NotAuthorized",
-                "message": "You do not have permission to operate on this record."
-            });
+        if ((req.params.id != req.user._id) && (!req.user.isAdmin())) {
+            res.notAuthorized();
         } else {
             var userPatch = req.body;
             User.findById(req.params.id, function(err, user) {
                 if (err) {
-                    res.status(404).json({
-                        "status": false,
-                        "error": "UserNotFound",
-                        "message": err.message
-                    });
+                    res.notFound();
                 }
                 if (userPatch.name != null && userPatch.name.first != null) {
                     user.name.first = userPatch.name.first;
                 }
                 user.save(function(err) {
                     if (err) {
-                        res.status(500).json({
-                            "status": false,
-                            "error": "Unknown",
-                            "message": err.message
-                        });
+                        res.failure(err);
                     } else {
                         res.json({
                             "status": true,
@@ -344,28 +314,16 @@ module.exports = function(app, router) {
      * @apiUse apiErrorExampleUserNotFound
      */
     router.delete('/api/user/:id', function(req, res) {
-        if (req.decoded.roles == null || req.decoded.roles.indexOf('admin') == -1) {
-            res.status(401).json({
-                "status": false,
-                "error": "NotAuthorized",
-                "message": "You do not have permission to operate on this record."
-            });
+        if (!req.user.isAdmin()) {
+            res.notAuthorized();
         } else {
             User.findById(req.params.id, function(err, user) {
                 if (err) {
-                    res.status(404).json({
-                        "status": false,
-                        "error": "UserNotFound",
-                        "message": err.message
-                    });
+                    res.notFound();
                 } else {
                     User.findByIdAndRemove(req.params.id, function(err, user) {
                         if (err) {
-                            res.status(500).json({
-                                "status": false,
-                                "error": "Unknown",
-                                "message": err.message
-                            });
+                            res.failure(err);
                         } else {
                             res.json({
                                 "status": true,
