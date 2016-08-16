@@ -23,16 +23,6 @@
  * </pre>
  */
 
-/**
- * @apiDefine apiErrorExampleUserNotFound
- * @apiErrorExample UserNotFound
- *     HTTP/1.1 404 Not Found
- *     {
- *         "status": false,
- *         "error": "UserNotFound"
- *     }
- */
-
 var User = require('../../models/user');
 
 module.exports = function(app, router) {
@@ -120,7 +110,7 @@ module.exports = function(app, router) {
      * @apiUse apiErrorGeneric
      * @apiUse apiErrorExampleAccessToken
      * @apiUse apiErrorExampleNotAuthorized
-     * @apiUse apiErrorExampleUserNotFound
+     * @apiUse apiErrorExampleNotFound
      */
     router.get('/api/user/:id', function(req, res) {
         if (!req.user.isAdmin()) {
@@ -207,8 +197,7 @@ module.exports = function(app, router) {
     });
     /**
      * @api {patch} /api/user/:id Update
-     * @apiPermission apiPermissionAdmin
-     * @apiPermission User
+     * @apiPermission apiPermissionUser
      * @apiGroup apiGroupUser
      * @apiName Update
      * @apiDescription A role of <code>Admin</code> may update any user object.
@@ -263,7 +252,7 @@ module.exports = function(app, router) {
      * @apiUse apiErrorExampleAccessToken
      * @apiUse apiErrorExampleNotAuthorized
      * @apiUse apiErrorExampleFailure
-     * @apiUse apiErrorExampleUserNotFound
+     * @apiUse apiErrorExampleNotFound
      */
     router.patch('/api/user/:id', function(req, res) {
         if ((req.params.id != req.user._id) && (!req.user.isAdmin())) {
@@ -311,7 +300,7 @@ module.exports = function(app, router) {
      * @apiUse apiErrorExampleAccessToken
      * @apiUse apiErrorExampleNotAuthorized
      * @apiUse apiErrorExampleFailure
-     * @apiUse apiErrorExampleUserNotFound
+     * @apiUse apiErrorExampleNotFound
      */
     router.delete('/api/user/:id', function(req, res) {
         if (!req.user.isAdmin()) {
@@ -321,7 +310,7 @@ module.exports = function(app, router) {
                 if (err) {
                     res.notFound();
                 } else {
-                    User.findByIdAndRemove(req.params.id, function(err, user) {
+                    user.remove(function(err, user) {
                         if (err) {
                             res.failure(err);
                         } else {
