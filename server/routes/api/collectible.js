@@ -46,7 +46,7 @@ var Collectible = require('../../models/collectible');
 module.exports = function(app, router) {
     /**
      * @api {get} /api/collectible Read All
-     * @apiUse apiPermissionAdmin
+     * @apiPermission apiPermissionAdmin
      * @apiGroup apiGroupCollectible
      * @apiName ReadAll
      * @apiDescription Read details for all collectibles.
@@ -89,7 +89,7 @@ module.exports = function(app, router) {
     });
     /**
      * @api {get} /api/collectible/:id Read Single
-     * @apiUse apiPermissionPublic
+     * @apiPermission apiPermissionPublic
      * @apiGroup apiGroupCollectible
      * @apiName ReadSingle
      * @apiDescription Read details for a single collectible.

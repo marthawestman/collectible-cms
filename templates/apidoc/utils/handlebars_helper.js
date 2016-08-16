@@ -6,10 +6,12 @@ define([
 
     Handlebars.registerHelper('if_header', function(string, headers, options) {
       var found = false;
-      for (var i=0; i<headers.length; i++) {
-        if (typeof(headers[i]["defaultValue"]) != 'undefined' && headers[i].defaultValue == string) {
-            return options.fn(this);
-        }
+      if (typeof(headers) != "undefined") {
+          for (var i=0; i<headers.length; i++) {
+              if (typeof(headers[i]["defaultValue"]) != 'undefined' && headers[i].defaultValue == string) {
+                  return options.fn(this);
+              }
+          }
       }
       return options.inverse(this);
     });

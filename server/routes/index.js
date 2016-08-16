@@ -12,7 +12,7 @@ var User = require('../models/user');
  */
 /**
  * @apiDefine apiPermissionPublic Public
- * The request may be anonymous. No user role is required.
+ * The request may be anonymous. No user role is required. No access token is required.
  */
 
 /**
