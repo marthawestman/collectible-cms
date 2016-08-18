@@ -1,0 +1,43 @@
+﻿<html>
+<head>
+    <!-- static route setup in express allows this base href -->
+    <base href="/">
+    <title>Collectible CMS</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- 1. Load libraries -->
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/es6-shim/es6-shim.js"></script>
+    <script src="node_modules/zone.js/dist/zone.js"></script>
+    <script src="node_modules/reflect-metadata/Reflect.js"></script>
+    <script src="node_modules/systemjs/dist/system.src.js"></script>
+    <script src="systemjs.config.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script>
+      System.import('app').catch(function(err){ console.error(err); });
+    </script>
+</head>
+<!-- 3. Display the application -->
+<body>
+    <div class="public-header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12">
+                    <a href="/public" class="pull-left gap-right"><img src="img/collectible-cms.png" class="img-responsive" /></a>
+                    <h1><a href="/public">Collectible CMS</a></h1>
+                    <ul>
+                        <li><a href="#">One</a></li>
+                        <li><a href="#">Two</a></li>
+                        <li><a href="#">Three</a></li>
+                        <li>###-###-####</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <my-app>Loading...</my-app>
+</body>
+</html>

@@ -27,6 +27,8 @@ app.use(bodyParser.json());
 app.use(morgan('dev'));
 
 app.use('/apidoc', express.static('apidoc'));
+app.use('/client', express.static('client'));
+app.use('/', express.static('client'));
 
 // Routes
 var router = express.Router();
