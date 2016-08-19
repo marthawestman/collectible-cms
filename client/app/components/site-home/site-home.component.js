@@ -9,22 +9,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var http_1 = require('@angular/http');
-var HttpService = (function () {
-    function HttpService(http) {
-        this.http = http;
+var SiteHome = (function () {
+    function SiteHome() {
     }
-    HttpService.prototype.get = function (url) {
-        return this.http.get(url);
+    SiteHome.prototype.ngOnInit = function () {
     };
-    HttpService.prototype.post = function (url, body, options) {
-        return this.http.post(url, body, options);
-    };
-    HttpService = __decorate([
-        core_1.Injectable(), 
-        __metadata('design:paramtypes', [http_1.Http])
-    ], HttpService);
-    return HttpService;
+    SiteHome = __decorate([
+        core_1.Component({
+            selector: 'site-home',
+            templateUrl: 'app/components/site-home/site-home.html',
+            styleUrls: ['app/components/site-home/site-home.css'],
+        }), 
+        __metadata('design:paramtypes', [])
+    ], SiteHome);
+    return SiteHome;
 }());
-exports.HttpService = HttpService;
-//# sourceMappingURL=http.js.map
+exports.SiteHome = SiteHome;
+;
+//# sourceMappingURL=site-home.component.js.map

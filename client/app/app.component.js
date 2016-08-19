@@ -12,6 +12,8 @@ var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var http_1 = require('@angular/http');
 var http_2 = require('./services/http/http');
+var user_1 = require('./services/user/user');
+var authenticate_service_1 = require('./services/authenticate/authenticate.service');
 var AppComponent = (function () {
     function AppComponent(titleService) {
         this.titleService = titleService;
@@ -22,8 +24,14 @@ var AppComponent = (function () {
     AppComponent = __decorate([
         core_1.Component({
             selector: 'my-app',
-            template: "\n        <div class=\"public-app\">\n            <div class=\"public-menu\">\n                <a routerLink=\"password-reset\" routerLinkActive=\"active\">Password Reset</a>\n                <a routerLink=\"user-edit\" routerLinkActive=\"active\">User Edit</a>\n            </div>\n            <div class=\"public-content\">\n                <router-outlet></router-outlet>\n            </div>\n        </div>\n    ",
-            providers: [platform_browser_1.Title, http_1.HTTP_PROVIDERS, http_2.HttpService]
+            template: "\n        <div class=\"public-app\">\n            <main-menu></main-menu>\n            <router-outlet></router-outlet>\n        </div>\n    ",
+            providers: [
+                platform_browser_1.Title,
+                http_1.HTTP_PROVIDERS,
+                http_2.HttpService,
+                user_1.UserService,
+                authenticate_service_1.AuthenticateService
+            ]
         }), 
         __metadata('design:paramtypes', [platform_browser_1.Title])
     ], AppComponent);

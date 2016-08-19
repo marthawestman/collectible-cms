@@ -1,0 +1,9 @@
+.site-home-component {
+}
+
+.site-home-component > .inner {
+	max-width: 1200px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 1em;
+}

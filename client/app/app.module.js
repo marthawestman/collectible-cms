@@ -11,15 +11,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var forms_1 = require('@angular/forms');
-var app_component_1 = require('./app.component');
 var router_1 = require('@angular/router');
+var app_component_1 = require('./app.component');
+// Landing pages.
 var password_reset_component_1 = require('./components/password-reset/password-reset.component');
 var user_edit_component_1 = require('./components/user-edit/user-edit.component');
+var site_home_component_1 = require('./components/site-home/site-home.component');
+// Components.
+var main_menu_1 = require('./components/main-menu/main-menu');
+var log_in_component_1 = require('./components/log-in/log-in.component');
 var appRoutes = [
     {
         path: '',
-        redirectTo: '/user-edit',
-        pathMatch: 'full'
+        component: site_home_component_1.SiteHome
     },
     {
         path: 'password-reset',
@@ -40,7 +44,7 @@ var AppModule = (function () {
                 forms_1.FormsModule,
                 router_1.RouterModule.forRoot(appRoutes)
             ],
-            declarations: [app_component_1.AppComponent],
+            declarations: [app_component_1.AppComponent, main_menu_1.MainMenu, log_in_component_1.LogIn],
             bootstrap: [app_component_1.AppComponent]
         }), 
         __metadata('design:paramtypes', [])

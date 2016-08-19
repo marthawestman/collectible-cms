@@ -1,8 +1,8 @@
 ﻿body {
     margin: 0;
     padding: 0;
+    font-family: 'arial narrow';
     font-size: 18px;
-    line-height: 1.2em;
 }
 .form-control {
     font-size: 1em;
@@ -28,52 +28,4 @@
     color: #373a3c;
     background-color: #e6e6e6;
     border-color: #adadad;
-}
-h1 {
-    font-size: 2.5em;
-}
-
-/* ===== Site Header ===== */
-.public-header {
-    padding-bottom: 0.5em;
-    background-color: #f8f8f8;
-    border-bottom: 1px solid #e0e0e0;
-}
-.public-header h1 a {
-    color: #000000;
-}
-.public-header ul {
-    display: inline-block;
-    font-size: 1em;
-    line-height: 1.3em;
-}
-
-/* ===== View Port ===== */
-.public-app { 
-}
-.public-app > div {
-}
-.public-app .public-menu {
-    padding: 0.6em;
-    padding-left: 2em;
-    background-color: #f0f0f0;
-    border-bottom: 2px solid #cccccc;
-}
-.public-app .public-menu a {
-    margin-right: 2em;
-}
-.public-app .public-content {
-    padding: 2em;
-}
-.public-app .public-content h2 {
-    margin-top: 0;
-}
-
-@media (max-width: 767px) {
-    body { font-size: 12px; }
-}
-@media (max-width: 567px) {
-    .public-header { padding-bottom: 0.5em; }
-    .public-header img { display: none; }
-    .public-header h1 { margin-bottom: 0.25em; }
 }

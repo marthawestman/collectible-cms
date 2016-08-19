@@ -24,7 +24,7 @@ var crypto = require('crypto');
 
 module.exports = function(app, router) {
     /**
-     * @api {post} /api/authenticate Request access token
+     * @api {post} /api/v1/authenticate Request access token
      * @apiGroup apiGroupAuthentication
      * @apiName Authenticate
      * @apiDescription After authenticating with an email address and password
@@ -63,7 +63,7 @@ yRQYnWzskCZUxPwaQupWkiUzKELZ49eM7oWxAQK_ZXw"
      *         "message": "The password for the user was incorrect."
      *      }
      */
-    router.post('/api/authenticate', function(req, res) {
+    router.post('/authenticate', function(req, res) {
         // find the user
         User.findOne({
             email: req.body.email

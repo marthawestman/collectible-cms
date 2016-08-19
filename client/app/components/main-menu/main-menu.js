@@ -9,22 +9,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var http_1 = require('@angular/http');
-var HttpService = (function () {
-    function HttpService(http) {
-        this.http = http;
+var user_1 = require('../../services/user/user');
+var MainMenu = (function () {
+    function MainMenu(userService) {
+        this.userService = userService;
     }
-    HttpService.prototype.get = function (url) {
-        return this.http.get(url);
+    MainMenu.prototype.ngOnInit = function () {
     };
-    HttpService.prototype.post = function (url, body, options) {
-        return this.http.post(url, body, options);
-    };
-    HttpService = __decorate([
-        core_1.Injectable(), 
-        __metadata('design:paramtypes', [http_1.Http])
-    ], HttpService);
-    return HttpService;
+    MainMenu = __decorate([
+        core_1.Component({
+            selector: 'main-menu',
+            templateUrl: 'app/components/main-menu/main-menu.html',
+            styleUrls: ['app/components/main-menu/main-menu.css'],
+        }), 
+        __metadata('design:paramtypes', [user_1.UserService])
+    ], MainMenu);
+    return MainMenu;
 }());
-exports.HttpService = HttpService;
-//# sourceMappingURL=http.js.map
+exports.MainMenu = MainMenu;
+;
+//# sourceMappingURL=main-menu.js.map

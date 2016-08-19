@@ -26,16 +26,15 @@ app.use(bodyParser.json());
 // Use morgan to log requests to the console
 app.use(morgan('dev'));
 
+// Api Routes
+var router = express.Router();
+require('./server/routes/')(app, router);
+app.use('/api/v1', router);
+// Static Routes.
 app.use('/apidoc', express.static('apidoc'));
 app.use('/client', express.static('client'));
 app.use('/', express.static('client'));
 
-// Routes
-var router = express.Router();
-require('./server/routes/')(app, router);
-app.use(router);
-
 // Start the server
 app.listen(port);
 console.log('Magic happens at http://localhost:' + port);
-
