@@ -23,7 +23,7 @@ By visiting http://localhost/setup the default admin user will be created. Remem
 
 * `npm run docs`
 
-Visit http://localhost:8080/apidoc and issue test API requests as desired.
+Visit http://localhost:8080/apidoc/v1 and issue test API requests as desired.
 
 ### Sublime Text 2 Configuration
 

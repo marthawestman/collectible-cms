@@ -45,7 +45,7 @@ var Collectible = require('../../models/collectible');
 
 module.exports = function(app, router) {
     /**
-     * @api {get} /api/collectible Read All
+     * @api {get} /api/v1/collectible Read All
      * @apiPermission apiPermissionAdmin
      * @apiGroup apiGroupCollectible
      * @apiName ReadAll
@@ -71,7 +71,7 @@ module.exports = function(app, router) {
      * @apiUse apiErrorExampleNotAuthorized
      * @apiUse apiErrorExampleFailure
      */
-    router.get('/api/collectible', function(req, res) {
+    router.get('/api/v1/collectible', function(req, res) {
         if (!req.user.isAdmin()) {
             res.notAuthorized()
         } else {
@@ -88,7 +88,7 @@ module.exports = function(app, router) {
         }
     });
     /**
-     * @api {get} /api/collectible/:id Read Single
+     * @api {get} /api/v1/collectible/:id Read Single
      * @apiPermission apiPermissionPublic
      * @apiGroup apiGroupCollectible
      * @apiName ReadSingle
@@ -122,7 +122,7 @@ module.exports = function(app, router) {
      * @apiUse apiErrorGeneric
      * @apiUse apiErrorExampleNotFound
      */
-    router.get('/api/collectible/:id', function(req, res) {
+    router.get('/api/v1/collectible/:id', function(req, res) {
         Collectible.findById(req.params.id, function(err, collectible) {
             if (err) {
                 res.notFound();
@@ -135,7 +135,7 @@ module.exports = function(app, router) {
         });
     });
     /**
-     * @api {post} /api/collectible Create
+     * @api {post} /api/v1/collectible Create
      * @apiPermission apiPermissionUser
      * @apiGroup apiGroupCollectible
      * @apiName Create
@@ -185,7 +185,7 @@ module.exports = function(app, router) {
      * @apiUse apiErrorExampleNotAuthorized
      * @apiUse apiErrorExampleFailure
      */
-    router.post('/api/collectible', function(req, res) {
+    router.post('/api/v1/collectible', function(req, res) {
         if (!req.user.isUser()) {
             res.notAuthorized();
         } else {
@@ -210,7 +210,7 @@ module.exports = function(app, router) {
         }
     });
     /**
-     * @api {delete} /api/collectible/:id Delete
+     * @api {delete} /api/v1/collectible/:id Delete
      * @apiPermission apiPermissionUser
      * @apiGroup apiGroupCollectible
      * @apiName Delete
@@ -231,7 +231,7 @@ module.exports = function(app, router) {
      * @apiUse apiErrorExampleFailure
      * @apiUse apiErrorExampleNotFound
      */
-    router.delete('/api/collectible/:id', function(req, res) {
+    router.delete('/api/v1/collectible/:id', function(req, res) {
         Collectible.findById(req.params.id, function(err, collectible) {
             if (err) {
                 res.notFound();
@@ -251,7 +251,7 @@ module.exports = function(app, router) {
         });
     });
     /**
-     * @api {patch} /api/collectible/:id Update
+     * @api {patch} /api/v1/collectible/:id Update
      * @apiPermission apiPermissionUser
      * @apiGroup apiGroupCollectible
      * @apiName Update
@@ -310,7 +310,7 @@ module.exports = function(app, router) {
      * @apiUse apiErrorExampleFailure
      * @apiUse apiErrorExampleNotFound
      */
-    router.patch('/api/collectible/:id', function(req, res) {
+    router.patch('/api/v1/collectible/:id', function(req, res) {
         Collectible.findById(req.params.id, function(err, collectible) {
             if (err) {
                 res.notFound();

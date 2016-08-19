@@ -27,7 +27,7 @@ var User = require('../../models/user');
 
 module.exports = function(app, router) {
     /**
-     * @api {get} /api/user Read all
+     * @api {get} /api/v1/user Read all
      * @apiPermission apiPermissionAdmin
      * @apiGroup apiGroupUser
      * @apiName ReadAll
@@ -65,7 +65,7 @@ module.exports = function(app, router) {
      * @apiUse apiErrorExampleAccessToken
      * @apiUse apiErrorExampleNotAuthorized
      */
-    router.get('/api/user', function(req, res) {
+    router.get('/api/v1/user', function(req, res) {
         if (!req.user.isAdmin()) {
             res.notAuthorized();
         } else {
@@ -78,7 +78,7 @@ module.exports = function(app, router) {
         }
     });
     /**
-     * @api {get} /api/user/:id Read single
+     * @api {get} /api/v1/user/:id Read single
      * @apiPermission apiPermissionAdmin
      * @apiGroup apiGroupUser
      * @apiName ReadSingle
@@ -112,7 +112,7 @@ module.exports = function(app, router) {
      * @apiUse apiErrorExampleNotAuthorized
      * @apiUse apiErrorExampleNotFound
      */
-    router.get('/api/user/:id', function(req, res) {
+    router.get('/api/v1/user/:id', function(req, res) {
         if (!req.user.isAdmin()) {
             res.notAuthorized();
         } else {
@@ -129,7 +129,7 @@ module.exports = function(app, router) {
         }
     });
     /**
-     * @api {post} /api/user Create
+     * @api {post} /api/v1/user Create
      * @apiPermission apiPermissionAdmin
      * @apiGroup apiGroupUser
      * @apiName Create
@@ -178,7 +178,7 @@ module.exports = function(app, router) {
      * @apiUse apiErrorExampleNotAuthorized
      * @apiUse apiErrorExampleFailure
      */
-    router.post('/api/user', function(req, res) {
+    router.post('/api/v1/user', function(req, res) {
         if (!req.user.isAdmin()) {
             res.notAuthorized();
         } else {
@@ -196,7 +196,7 @@ module.exports = function(app, router) {
         }
     });
     /**
-     * @api {patch} /api/user/:id Update
+     * @api {patch} /api/v1/user/:id Update
      * @apiPermission apiPermissionUser
      * @apiGroup apiGroupUser
      * @apiName Update
@@ -254,7 +254,7 @@ module.exports = function(app, router) {
      * @apiUse apiErrorExampleFailure
      * @apiUse apiErrorExampleNotFound
      */
-    router.patch('/api/user/:id', function(req, res) {
+    router.patch('/api/v1/user/:id', function(req, res) {
         if ((req.params.id != req.user._id) && (!req.user.isAdmin())) {
             res.notAuthorized();
         } else {
@@ -280,7 +280,7 @@ module.exports = function(app, router) {
         }
     });
     /**
-     * @api {delete} /api/user/:id Delete
+     * @api {delete} /api/v1/user/:id Delete
      * @apiPermission apiPermissionAdmin
      * @apiPermission apiPermissionUser
      * @apiGroup apiGroupUser
@@ -302,7 +302,7 @@ module.exports = function(app, router) {
      * @apiUse apiErrorExampleFailure
      * @apiUse apiErrorExampleNotFound
      */
-    router.delete('/api/user/:id', function(req, res) {
+    router.delete('/api/v1/user/:id', function(req, res) {
         if (!req.user.isAdmin()) {
             res.notAuthorized();
         } else {
