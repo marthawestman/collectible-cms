@@ -71,7 +71,7 @@ module.exports = function(app, router) {
      * @apiUse apiErrorExampleNotAuthorized
      * @apiUse apiErrorExampleFailure
      */
-    router.get('/api/v1/collectible', function(req, res) {
+    router.get('/collectible', function(req, res) {
         if (!req.user.isAdmin()) {
             res.notAuthorized()
         } else {
@@ -122,7 +122,7 @@ module.exports = function(app, router) {
      * @apiUse apiErrorGeneric
      * @apiUse apiErrorExampleNotFound
      */
-    router.get('/api/v1/collectible/:id', function(req, res) {
+    router.get('/collectible/:id', function(req, res) {
         Collectible.findById(req.params.id, function(err, collectible) {
             if (err) {
                 res.notFound();
@@ -185,7 +185,7 @@ module.exports = function(app, router) {
      * @apiUse apiErrorExampleNotAuthorized
      * @apiUse apiErrorExampleFailure
      */
-    router.post('/api/v1/collectible', function(req, res) {
+    router.post('/collectible', function(req, res) {
         if (!req.user.isUser()) {
             res.notAuthorized();
         } else {
@@ -231,7 +231,7 @@ module.exports = function(app, router) {
      * @apiUse apiErrorExampleFailure
      * @apiUse apiErrorExampleNotFound
      */
-    router.delete('/api/v1/collectible/:id', function(req, res) {
+    router.delete('/collectible/:id', function(req, res) {
         Collectible.findById(req.params.id, function(err, collectible) {
             if (err) {
                 res.notFound();
@@ -310,7 +310,7 @@ module.exports = function(app, router) {
      * @apiUse apiErrorExampleFailure
      * @apiUse apiErrorExampleNotFound
      */
-    router.patch('/api/v1/collectible/:id', function(req, res) {
+    router.patch('/collectible/:id', function(req, res) {
         Collectible.findById(req.params.id, function(err, collectible) {
             if (err) {
                 res.notFound();

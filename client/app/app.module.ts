@@ -4,26 +4,18 @@ import { FormsModule }			from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { AppComponent }			from './app.component';
 // Landing pages.
-import { PasswordReset } 		from './components/password-reset/password-reset.component';
-import { UserEdit } 			from './components/user-edit/user-edit.component';
-import { SiteHome }             from './components/site-home/site-home.component';
+import { PasswordReset } 		      from './components/password-reset/password-reset.component';
+import { SiteHome }                   from './components/site-home/site-home.component';
+import { UsersViewsFullComponent }    from './components/users/views/full/full.component';
 // Components.
-import { MainMenu }             from './components/main-menu/main-menu.component';
-import { LogIn }                from './components/log-in/log-in.component';
+import { MainMenu }                   from './components/main-menu/main-menu.component';
+import { LogIn }                      from './components/log-in/log-in.component';
+import { UsersListsAllComponent }     from './components/users/lists/all/all.component';
 
 const appRoutes: Routes = [
-    {
-        path: '',
-        component: SiteHome
-    },
-    {
-        path: 'password-reset',
-        component: PasswordReset
-    },
-    {
-        path: 'user-edit',
-        component: UserEdit
-    }
+    { path: '', component: SiteHome },
+    { path: 'password-reset', component: PasswordReset },
+    { path: 'u/:id', component: UsersViewsFullComponent }
 ];
 
 @NgModule({
@@ -35,7 +27,8 @@ const appRoutes: Routes = [
 	declarations: [ 
         AppComponent, 
         MainMenu, 
-        LogIn 
+        LogIn,
+        UsersListsAllComponent
     ],
 	bootstrap: [ AppComponent ]
 })

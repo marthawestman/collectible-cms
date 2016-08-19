@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var http_1 = require('../http/http');
+var http_service_1 = require('../http/http.service');
 var AuthenticateService = (function () {
     function AuthenticateService(httpService) {
         this.httpService = httpService;
@@ -30,7 +30,7 @@ var AuthenticateService = (function () {
             email: email,
             password: password
         };
-        return this.httpService.postSimple('/api/v1/authenticate', JSON.stringify(authenticate))
+        return this.httpService.postSimple('/api/v1/authenticate', authenticate)
             .map(function (json) { return json.token; });
     };
     AuthenticateService.prototype.getToken = function () {
@@ -43,10 +43,9 @@ var AuthenticateService = (function () {
     };
     AuthenticateService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof http_1.HttpService !== 'undefined' && http_1.HttpService) === 'function' && _a) || Object])
+        __metadata('design:paramtypes', [http_service_1.HttpService])
     ], AuthenticateService);
     return AuthenticateService;
-    var _a;
 }());
 exports.AuthenticateService = AuthenticateService;
 //# sourceMappingURL=authenticate.service.js.map

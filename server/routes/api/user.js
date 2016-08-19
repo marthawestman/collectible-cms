@@ -65,7 +65,7 @@ module.exports = function(app, router) {
      * @apiUse apiErrorExampleAccessToken
      * @apiUse apiErrorExampleNotAuthorized
      */
-    router.get('/api/v1/user', function(req, res) {
+    router.get('/user', function(req, res) {
         if (!req.user.isAdmin()) {
             res.notAuthorized();
         } else {
@@ -112,7 +112,7 @@ module.exports = function(app, router) {
      * @apiUse apiErrorExampleNotAuthorized
      * @apiUse apiErrorExampleNotFound
      */
-    router.get('/api/v1/user/:id', function(req, res) {
+    router.get('/user/:id', function(req, res) {
         if (!req.user.isAdmin()) {
             res.notAuthorized();
         } else {
@@ -178,7 +178,7 @@ module.exports = function(app, router) {
      * @apiUse apiErrorExampleNotAuthorized
      * @apiUse apiErrorExampleFailure
      */
-    router.post('/api/v1/user', function(req, res) {
+    router.post('/user', function(req, res) {
         if (!req.user.isAdmin()) {
             res.notAuthorized();
         } else {
@@ -254,7 +254,7 @@ module.exports = function(app, router) {
      * @apiUse apiErrorExampleFailure
      * @apiUse apiErrorExampleNotFound
      */
-    router.patch('/api/v1/user/:id', function(req, res) {
+    router.patch('/user/:id', function(req, res) {
         if ((req.params.id != req.user._id) && (!req.user.isAdmin())) {
             res.notAuthorized();
         } else {
@@ -302,7 +302,7 @@ module.exports = function(app, router) {
      * @apiUse apiErrorExampleFailure
      * @apiUse apiErrorExampleNotFound
      */
-    router.delete('/api/v1/user/:id', function(req, res) {
+    router.delete('/user/:id', function(req, res) {
         if (!req.user.isAdmin()) {
             res.notAuthorized();
         } else {

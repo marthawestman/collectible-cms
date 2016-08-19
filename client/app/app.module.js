@@ -15,24 +15,16 @@ var router_1 = require('@angular/router');
 var app_component_1 = require('./app.component');
 // Landing pages.
 var password_reset_component_1 = require('./components/password-reset/password-reset.component');
-var user_edit_component_1 = require('./components/user-edit/user-edit.component');
 var site_home_component_1 = require('./components/site-home/site-home.component');
+var full_component_1 = require('./components/users/views/full/full.component');
 // Components.
 var main_menu_component_1 = require('./components/main-menu/main-menu.component');
 var log_in_component_1 = require('./components/log-in/log-in.component');
+var all_component_1 = require('./components/users/lists/all/all.component');
 var appRoutes = [
-    {
-        path: '',
-        component: site_home_component_1.SiteHome
-    },
-    {
-        path: 'password-reset',
-        component: password_reset_component_1.PasswordReset
-    },
-    {
-        path: 'user-edit',
-        component: user_edit_component_1.UserEdit
-    }
+    { path: '', component: site_home_component_1.SiteHome },
+    { path: 'password-reset', component: password_reset_component_1.PasswordReset },
+    { path: 'u/:id', component: full_component_1.UsersViewsFullComponent }
 ];
 var AppModule = (function () {
     function AppModule() {
@@ -47,7 +39,8 @@ var AppModule = (function () {
             declarations: [
                 app_component_1.AppComponent,
                 main_menu_component_1.MainMenu,
-                log_in_component_1.LogIn
+                log_in_component_1.LogIn,
+                all_component_1.UsersListsAllComponent
             ],
             bootstrap: [app_component_1.AppComponent]
         }), 

@@ -21,7 +21,7 @@ export class AuthenticateService {
     		email: email,
     		password: password
     	};
-		return this.httpService.postSimple('/api/v1/authenticate', JSON.stringify(authenticate))
+		return this.httpService.postSimple('/api/v1/authenticate', authenticate)
             .map( (json) => { return json.token; });
     }
     getToken() {
