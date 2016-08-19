@@ -21,12 +21,19 @@ By visiting http://localhost/setup the default admin user will be created. Remem
 
 ### Create and view the documentation
 
-* `npm install apidoc -g`
-* `apidoc -i server/ -o apidoc/ -t templates/apidoc`
+* `npm run docs`
 
 Visit http://localhost:8080/apidoc and issue test API requests as desired.
 
-### Hide undesired extensions in sublime
+### Sublime Text 2 Configuration
+
+#### Install Typescript Support
+
+* https://github.com/Microsoft/TypeScript-Sublime-Plugin
+
+#### Hide .js and .map Files
+
+In preferences -> Settings -> User
 
     {
         "file_exclude_patterns": ["collectible-cms/client/**/*.js", "collectible-cms/**/*.map"]
