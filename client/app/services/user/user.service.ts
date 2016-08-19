@@ -1,7 +1,7 @@
 import { Injectable }	from '@angular/core';
 import { User }			from '../../models/user';
 import { USERS }		from '../../mocks/user';
-import { HttpService }	from '../http/http';
+import { HttpService }	from '../http/http.service';
 
 @Injectable()
 export class UserService {

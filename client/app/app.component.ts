@@ -2,8 +2,8 @@
 import { OnInit }          from '@angular/core';
 import { Title }           from '@angular/platform-browser';
 import { HTTP_PROVIDERS }  from '@angular/http';
-import { HttpService }     from './services/http/http';
-import { UserService }     from './services/user/user';
+import { HttpService }     from './services/http/http.service';
+import { UserService }     from './services/user/user.service';
 import { AuthenticateService }  from './services/authenticate/authenticate.service';
 
 @Component({

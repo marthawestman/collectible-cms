@@ -1,7 +1,7 @@
 import { Component }       from '@angular/core';
 import { OnInit }          from '@angular/core';
 import { User }            from '../../models/user';
-import { UserService }     from '../../services/user/user';
+import { UserService }     from '../../services/user/user.service';
 
 @Component({
     selector: 'main-menu',

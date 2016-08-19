@@ -25,3 +25,9 @@ By visiting http://localhost/setup the default admin user will be created. Remem
 * `apidoc -i server/ -o apidoc/ -t templates/apidoc`
 
 Visit http://localhost:8080/apidoc and issue test API requests as desired.
+
+### Hide undesired extensions in sublime
+
+    {
+        "file_exclude_patterns": ["collectible-cms/client/**/*.js", "collectible-cms/**/*.map"]
+    }

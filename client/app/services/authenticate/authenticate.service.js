@@ -43,9 +43,10 @@ var AuthenticateService = (function () {
     };
     AuthenticateService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [http_1.HttpService])
+        __metadata('design:paramtypes', [(typeof (_a = typeof http_1.HttpService !== 'undefined' && http_1.HttpService) === 'function' && _a) || Object])
     ], AuthenticateService);
     return AuthenticateService;
+    var _a;
 }());
 exports.AuthenticateService = AuthenticateService;
 //# sourceMappingURL=authenticate.service.js.map

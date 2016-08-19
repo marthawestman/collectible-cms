@@ -2,7 +2,7 @@ import { Component }    from '@angular/core';
 import { OnInit }       from '@angular/core';
 import { Headers }		from '@angular/http';
 import { User }         from '../../models/user';
-import { UserService }  from '../../services/user/user';
+import { UserService }  from '../../services/user/user.service';
 import { AuthenticateService }	from '../../services/authenticate/authenticate.service';
 
 @Component({

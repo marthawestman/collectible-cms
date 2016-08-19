@@ -11,8 +11,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var http_1 = require('@angular/http');
-var http_2 = require('./services/http/http');
-var user_1 = require('./services/user/user');
+var http_service_1 = require('./services/http/http.service');
+var user_service_1 = require('./services/user/user.service');
 var authenticate_service_1 = require('./services/authenticate/authenticate.service');
 var AppComponent = (function () {
     function AppComponent(titleService) {
@@ -28,8 +28,8 @@ var AppComponent = (function () {
             providers: [
                 platform_browser_1.Title,
                 http_1.HTTP_PROVIDERS,
-                http_2.HttpService,
-                user_1.UserService,
+                http_service_1.HttpService,
+                user_service_1.UserService,
                 authenticate_service_1.AuthenticateService
             ]
         }), 

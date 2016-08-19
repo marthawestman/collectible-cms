@@ -8,7 +8,7 @@ import { PasswordReset } 		from './components/password-reset/password-reset.comp
 import { UserEdit } 			from './components/user-edit/user-edit.component';
 import { SiteHome }             from './components/site-home/site-home.component';
 // Components.
-import { MainMenu }             from './components/main-menu/main-menu';
+import { MainMenu }             from './components/main-menu/main-menu.component';
 import { LogIn }                from './components/log-in/log-in.component';
 
 const appRoutes: Routes = [
@@ -32,7 +32,11 @@ const appRoutes: Routes = [
 		FormsModule,
 		RouterModule.forRoot(appRoutes)
 	],
-	declarations: [ AppComponent, MainMenu, LogIn ],
+	declarations: [ 
+        AppComponent, 
+        MainMenu, 
+        LogIn 
+    ],
 	bootstrap: [ AppComponent ]
 })
 

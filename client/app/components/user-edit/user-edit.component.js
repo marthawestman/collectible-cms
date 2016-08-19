@@ -10,7 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
-var user_1 = require('../../services/user/user');
+var user_service_1 = require('../../services/user/user.service');
 var UserEdit = (function () {
     function UserEdit(http, userService) {
         this.http = http;
@@ -32,9 +32,9 @@ var UserEdit = (function () {
             templateUrl: 'app/components/user-edit/user-edit.html',
             styleUrls: ['app/components/user-edit/user-edit.css'],
             directives: [],
-            providers: [user_1.UserService]
+            providers: [user_service_1.UserService]
         }), 
-        __metadata('design:paramtypes', [http_1.Http, user_1.UserService])
+        __metadata('design:paramtypes', [http_1.Http, user_service_1.UserService])
     ], UserEdit);
     return UserEdit;
 }());

@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var user_1 = require('../../services/user/user');
+var user_service_1 = require('../../services/user/user.service');
 var authenticate_service_1 = require('../../services/authenticate/authenticate.service');
 var LogIn = (function () {
     function LogIn(authService, userService) {
@@ -37,7 +37,7 @@ var LogIn = (function () {
             templateUrl: 'app/components/log-in/log-in.html',
             styleUrls: ['app/components/log-in/log-in.css'],
         }), 
-        __metadata('design:paramtypes', [authenticate_service_1.AuthenticateService, user_1.UserService])
+        __metadata('design:paramtypes', [authenticate_service_1.AuthenticateService, user_service_1.UserService])
     ], LogIn);
     return LogIn;
 }());

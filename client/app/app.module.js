@@ -18,7 +18,7 @@ var password_reset_component_1 = require('./components/password-reset/password-r
 var user_edit_component_1 = require('./components/user-edit/user-edit.component');
 var site_home_component_1 = require('./components/site-home/site-home.component');
 // Components.
-var main_menu_1 = require('./components/main-menu/main-menu');
+var main_menu_component_1 = require('./components/main-menu/main-menu.component');
 var log_in_component_1 = require('./components/log-in/log-in.component');
 var appRoutes = [
     {
@@ -44,7 +44,11 @@ var AppModule = (function () {
                 forms_1.FormsModule,
                 router_1.RouterModule.forRoot(appRoutes)
             ],
-            declarations: [app_component_1.AppComponent, main_menu_1.MainMenu, log_in_component_1.LogIn],
+            declarations: [
+                app_component_1.AppComponent,
+                main_menu_component_1.MainMenu,
+                log_in_component_1.LogIn
+            ],
             bootstrap: [app_component_1.AppComponent]
         }), 
         __metadata('design:paramtypes', [])
