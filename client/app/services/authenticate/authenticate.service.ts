@@ -6,6 +6,8 @@ import { HttpService }	from '../http/http';
 export class AuthenticateService {
     constructor(private httpService: HttpService) { }
     /**
+     * Request authentication and return JWT in observable.
+     *
      * @example
      *     AuthService.authenticate(name, password)
      *     .subscribe(
@@ -19,15 +21,8 @@ export class AuthenticateService {
     		email: email,
     		password: password
     	};
-        var headers = new Headers();
-  	    headers.append('Content-Type', 'application/json');
-		return this.httpService.post('/api/v1/authenticate', JSON.stringify(authenticate), {
-		    headers: headers
-		}).map( (res) => {
-            return res.json();
-        }).map( (res) => {
-            return res.token;
-        });
+		return this.httpService.postSimple('/api/v1/authenticate', JSON.stringify(authenticate))
+            .map( (json) => { return json.token; });
     }
     getToken() {
     	return localStorage.getItem('token');

@@ -9,13 +9,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var http_1 = require('@angular/http');
-var http_2 = require('../http/http');
+var http_1 = require('../http/http');
 var AuthenticateService = (function () {
     function AuthenticateService(httpService) {
         this.httpService = httpService;
     }
     /**
+     * Request authentication and return JWT in observable.
+     *
      * @example
      *     AuthService.authenticate(name, password)
      *     .subscribe(
@@ -29,15 +30,8 @@ var AuthenticateService = (function () {
             email: email,
             password: password
         };
-        var headers = new http_1.Headers();
-        headers.append('Content-Type', 'application/json');
-        return this.httpService.post('/api/v1/authenticate', JSON.stringify(authenticate), {
-            headers: headers
-        }).map(function (res) {
-            return res.json();
-        }).map(function (res) {
-            return res.token;
-        });
+        return this.httpService.postSimple('/api/v1/authenticate', JSON.stringify(authenticate))
+            .map(function (json) { return json.token; });
     };
     AuthenticateService.prototype.getToken = function () {
         return localStorage.getItem('token');
@@ -49,7 +43,7 @@ var AuthenticateService = (function () {
     };
     AuthenticateService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [http_2.HttpService])
+        __metadata('design:paramtypes', [http_1.HttpService])
     ], AuthenticateService);
     return AuthenticateService;
 }());
