@@ -15,6 +15,15 @@ var AuthenticateService = (function () {
     function AuthenticateService(httpService) {
         this.httpService = httpService;
     }
+    /**
+     * @example
+     *     AuthService.authenticate(name, password)
+     *     .subscribe(
+     *         token => console.log("success: " + token),
+     *         err => console.log("error: " + err),
+     *         () => console.log('Authentication Complete')
+     *     );
+     */
     AuthenticateService.prototype.authenticate = function (email, password) {
         var authenticate = {
             email: email,
@@ -24,12 +33,16 @@ var AuthenticateService = (function () {
         headers.append('Content-Type', 'application/json');
         return this.httpService.post('/api/v1/authenticate', JSON.stringify(authenticate), {
             headers: headers
+        }).map(function (res) {
+            return res.json();
+        }).map(function (res) {
+            return res.token;
         });
     };
     AuthenticateService.prototype.getToken = function () {
         return localStorage.getItem('token');
     };
-    AuthenticateService.prototype.putToken = function (token) {
+    AuthenticateService.prototype.setToken = function (token) {
         if (token) {
             localStorage.setItem('token', token);
         }

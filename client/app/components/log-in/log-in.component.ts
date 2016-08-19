@@ -17,15 +17,14 @@ export class LogIn implements OnInit {
     constructor(private authService: AuthenticateService, private userService: UserService) { }
     logIn() {
     	this.authService.authenticate(this.name, this.password)
-	    .map(res => res.json())
 	    .subscribe(
-			data => this.success(data.token),
+			token => this.success(token),
 		    err => this.failure(err),
 		    () => console.log('Authentication Complete')
 		);
     }
     success(token) {
-		this.authService.putToken(token);
+		this.authService.setToken(token);
 		alert('Authenticated!');
     }
     failure(err) {

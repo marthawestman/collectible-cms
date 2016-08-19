@@ -19,11 +19,10 @@ var LogIn = (function () {
     LogIn.prototype.logIn = function () {
         var _this = this;
         this.authService.authenticate(this.name, this.password)
-            .map(function (res) { return res.json(); })
-            .subscribe(function (data) { return _this.success(data.token); }, function (err) { return _this.failure(err); }, function () { return console.log('Authentication Complete'); });
+            .subscribe(function (token) { return _this.success(token); }, function (err) { return _this.failure(err); }, function () { return console.log('Authentication Complete'); });
     };
     LogIn.prototype.success = function (token) {
-        this.authService.putToken(token);
+        this.authService.setToken(token);
         alert('Authenticated!');
     };
     LogIn.prototype.failure = function (err) {
