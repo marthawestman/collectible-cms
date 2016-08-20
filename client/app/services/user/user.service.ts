@@ -64,4 +64,23 @@ export class UserService {
                 return json.data
             });
     }
+    /**
+     * Delete single user.
+     *
+     * @example
+     *     UserService.delete(5)
+     *     .subscribe(
+     *         () => console.log('success'),
+     *         err => console.log('error: ' + err),
+     *         () => console.log('Request Complete')
+     *     );
+     */
+    delete(userId: string) {
+        return this.httpService.deleteSimple('/api/v1/user/' + userId, localStorage.getItem('token'))
+            .map( (json) => { 
+                if (!json.status)
+                    throw json.message;
+                return true; 
+            });
+    }
 }

@@ -1,15 +1,16 @@
 import { Component, OnInit }        from '@angular/core';
 import { ActivatedRoute }           from '@angular/router';
-import { User }                     from '../../../../models/user';
-import { UserService }              from '../../../../services/user/user.service';
+import { User }                     from '../../../models/user';
+import { UserService }              from '../../../services/user/user.service';
 
 @Component({
-    selector: 'users-views-full',
-    templateUrl: 'app/components/users/views/full/full.html',
-    styleUrls: ['app/components/users/views/full/full.css'],
+    moduleId: module.id,
+    selector: 'cc-routes-users-profile',
+    templateUrl: 'view.html',
+    styleUrls: ['style.css'],
 })
 
-export class UsersViewsFullComponent implements OnInit {
+export class RoutesUsersProfileComponent implements OnInit {
     working: boolean = false;
     loaded: boolean = false;
     userId: string;

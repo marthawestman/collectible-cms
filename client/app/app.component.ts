@@ -1,10 +1,10 @@
-﻿import { Component }       from '@angular/core';
-import { OnInit }          from '@angular/core';
-import { Title }           from '@angular/platform-browser';
-import { HTTP_PROVIDERS }  from '@angular/http';
-import { HttpService }     from './services/http/http.service';
-import { UserService }     from './services/user/user.service';
-import { AuthenticateService }  from './services/authenticate/authenticate.service';
+﻿import { Component }                     from '@angular/core';
+import { OnInit }                        from '@angular/core';
+import { Title }                         from '@angular/platform-browser';
+import { HTTP_PROVIDERS }                from '@angular/http';
+import { HttpService }                   from './services/http/http.service';
+import { UserService }                   from './services/user/user.service';
+import { AuthenticateService }           from './services/authenticate/authenticate.service';
 
 @Component({
     selector: 'my-app',

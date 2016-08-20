@@ -1,9 +1,9 @@
 import { Name }	from './name';
 
 export class User {
-	_id: number;
+	_id: string;
 	name: Name;
-	email: String;
-	password: String;
-	roles: [ String ];
+	email: string;
+	password: string;
+	roles: [ string ];
 }

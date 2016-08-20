@@ -1,7 +1,7 @@
 "use strict";
 exports.USERS = [
     {
-        _id: 1000,
+        _id: "1000",
         name: {
             first: 'john',
             middle: 'k',
@@ -15,7 +15,7 @@ exports.USERS = [
         ]
     },
     {
-        _id: 1001,
+        _id: "1001",
         name: {
             first: 'sam',
             middle: 'j',

@@ -1,6 +1,7 @@
-import { Component }                    from '@angular/core';
+import { Component, Input }             from '@angular/core';
 import { OnInit }                       from '@angular/core';
 import { User }                         from '../../../../models/user';
+import { AlertMessage }                 from '../../../../models/alertMessage';
 import { UserService }                  from '../../../../services/user/user.service';
 
 @Component({
@@ -10,10 +11,17 @@ import { UserService }                  from '../../../../services/user/user.ser
 })
 
 export class UsersListsAllComponent implements OnInit {
+    @Input() alerts: AlertMessage[];
     working: boolean = false;
     users : User[];
     constructor(private userService: UserService) { }
-    saveUser() {
+    deleteUser(user: User) {
+        this.userService.delete(user._id)
+            .subscribe(
+                () =>    { this.alerts.push({ type: 'success', message: 'User removed.' }) },
+                (err) => { this.alerts.push({ type: 'error', message: err}) },
+                () =>    { this.working = false; }
+            );
     }
     ngOnInit() {
         this.working = true;

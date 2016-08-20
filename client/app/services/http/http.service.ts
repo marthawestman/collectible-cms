@@ -29,6 +29,9 @@ export class HttpService {
     post(url: string, body: any, options?: RequestOptionsArgs) {
     	return this.http.post(url, body, options)
     }
+    delete(url: string, options?: RequestOptionsArgs) {
+        return this.http.delete(url, options);
+    }
     /**
      * Issue post request with 'applicaton/json', and x-access-token header and
      * return deserialized json response in observable.
@@ -77,6 +80,26 @@ export class HttpService {
             headers.append('x-access-token', token);
         }
         return this.get(url, { headers: headers })
+            .map(res => res.json())
+            .catch(this.handleError);
+    }
+    /**
+     * Issue delete request with x-access-token header and return deserialized
+     * json response in observable.
+     *
+     * @param string url
+     *    Endpoint to issue request against.
+     * @param string token (optional)
+     *    The token to attach to authenticate api access.
+     *
+     * @example
+     */
+    deleteSimple(url: string, token?: string) : Observable<any> {
+        var headers = new Headers();
+        if (token) {
+            headers.append('x-access-token', token);
+        }
+        return this.delete(url, { headers: headers })
             .map(res => res.json())
             .catch(this.handleError);
     }

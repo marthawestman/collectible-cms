@@ -13,10 +13,10 @@ var platform_browser_1 = require('@angular/platform-browser');
 var forms_1 = require('@angular/forms');
 var router_1 = require('@angular/router');
 var app_component_1 = require('./app.component');
-// Landing pages.
+// Routes, Landing pages.
 var password_reset_component_1 = require('./components/password-reset/password-reset.component');
-var site_home_component_1 = require('./components/site-home/site-home.component');
-var full_component_1 = require('./components/users/views/full/full.component');
+var component_1 = require('./routes/site/home/component');
+var component_2 = require('./routes/users/profile/component');
 // Components.
 var alert_1 = require('./components/alert/alert');
 var main_menu_component_1 = require('./components/main-menu/main-menu.component');
@@ -24,9 +24,9 @@ var log_in_component_1 = require('./components/log-in/log-in.component');
 var all_component_1 = require('./components/users/lists/all/all.component');
 var quick_component_1 = require('./components/users/create/quick/quick.component');
 var appRoutes = [
-    { path: '', component: site_home_component_1.SiteHome },
+    { path: '', component: component_1.RoutesSiteHomeComponent },
     { path: 'password-reset', component: password_reset_component_1.PasswordReset },
-    { path: 'u/:id', component: full_component_1.UsersViewsFullComponent }
+    { path: 'u/:id', component: component_2.RoutesUsersProfileComponent }
 ];
 var AppModule = (function () {
     function AppModule() {
