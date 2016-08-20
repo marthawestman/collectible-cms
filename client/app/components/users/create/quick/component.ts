@@ -21,13 +21,9 @@ export class UsersCreateQuickComponent implements OnInit {
     constructor(private userService: UserService) { }
     create() {
         this.working = true;
-        let user: User = {
-            name: null,
-            _id: null,
-            email: this.email,
-            password: this.password,
-            roles: null
-        }
+        let user: User = new User();
+        user.email = this.email;
+        user.password = this.password;
     	this.userService.create(user)
 	    .subscribe(
 			user => {

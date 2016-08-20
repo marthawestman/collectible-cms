@@ -40,9 +40,11 @@ userSchema.methods.isAdmin = function() {
 userSchema.methods.isUser = function() {
     return this.hasRole('user');
 };
+userSchema.methods.isRegistered = function() {
+    return ((this._id) != 0);
+};
 userSchema.methods.isAnonymous = function() {
-    return this.hasRole('anonymous');
+    return (this._id == 0);
 };
 
 module.exports = mongoose.model('User', userSchema);
-

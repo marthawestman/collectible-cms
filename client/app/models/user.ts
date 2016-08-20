@@ -6,4 +6,10 @@ export class User {
 	email: string;
 	password: string;
 	roles: [ string ];
+	isRegistered(): boolean {
+		if (this._id != null && this._id != "0") {
+			return true;
+		}
+		return false;
+	}
 }

@@ -80,10 +80,13 @@ yRQYnWzskCZUxPwaQupWkiUzKELZ49eM7oWxAQK_ZXw"
                     // create a token
                     var payload = {
                         "_id": user._doc._id,
+                        "name": {
+                            "first": user.name.first
+                        },
                         "roles": user._doc.roles
                     };
                     var token = jwt.sign(payload, app.get('tokenSignature'), {
-                        expiresIn: "24h" // expires in 24 hours
+                        expiresIn: "2h" // expires in 24 hours
                     });
                     // return the information including token as JSON
                     res.json({

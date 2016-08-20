@@ -11,8 +11,12 @@ var User = require('../models/user');
  * The request must authenticate the user with a json web token. The user must have a role of "user".
  */
 /**
+ * @apiDefine apiPermissionRegistered Registered
+ * The request must authenticate the user with a json web token. No specific user role is required.
+ */
+/**
  * @apiDefine apiPermissionPublic Public
- * The request may be anonymous. No user role is required. No access token is required.
+ * The request may be anonymous. No access token is required. No specific user role is required.
  */
 
 /**

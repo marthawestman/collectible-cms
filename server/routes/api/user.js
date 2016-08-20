@@ -28,10 +28,13 @@ var User = require('../../models/user');
 module.exports = function(app, router) {
     /**
      * @api {get} /user Read all
-     * @apiPermission apiPermissionAdmin
+     * @apiPermission apiPermissionRegistered
      * @apiGroup apiGroupUser
      * @apiName ReadAll
-     * @apiDescription Read details for all user accounts.
+     * @apiDescription 
+     *     Read details for all user accounts.
+     *     <p>If authenticated as 'admin' then all users will be returned,
+     *     otherwise only the requestor's user record will be returne.</p>
      * @apiUse apiHeaderAccessToken
      * @apiUse apiSuccessStatus
      * @apiSuccess {String} data An array of user objects.
@@ -66,10 +69,14 @@ module.exports = function(app, router) {
      * @apiUse apiErrorExampleNotAuthorized
      */
     router.get('/user', function(req, res) {
-        if (!req.user.isAdmin()) {
+        if (!req.user.isRegistered()) {
             res.notAuthorized();
         } else {
-            User.find({}, function(err, users) {
+            var search = {};
+            if (!req.user.isAdmin()) {
+                search = { _id: req.user._id };
+            }
+            User.find(search, function(err, users) {
                 res.json({
                     "status": true,
                     "data": users
