@@ -11,7 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var SiteHome = (function () {
     function SiteHome() {
-        this.errors = [];
+        this.alerts = [];
     }
     SiteHome.prototype.ngOnInit = function () {
     };

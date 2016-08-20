@@ -18,7 +18,7 @@ var password_reset_component_1 = require('./components/password-reset/password-r
 var site_home_component_1 = require('./components/site-home/site-home.component');
 var full_component_1 = require('./components/users/views/full/full.component');
 // Components.
-var error_1 = require('./components/error/error');
+var alert_1 = require('./components/alert/alert');
 var main_menu_component_1 = require('./components/main-menu/main-menu.component');
 var log_in_component_1 = require('./components/log-in/log-in.component');
 var all_component_1 = require('./components/users/lists/all/all.component');
@@ -40,7 +40,7 @@ var AppModule = (function () {
             ],
             declarations: [
                 app_component_1.AppComponent,
-                error_1.ErrorComponent,
+                alert_1.AlertComponent,
                 main_menu_component_1.MainMenu,
                 log_in_component_1.LogIn,
                 all_component_1.UsersListsAllComponent,

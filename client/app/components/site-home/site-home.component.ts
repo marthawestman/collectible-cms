@@ -1,6 +1,6 @@
-import { Component }	 from '@angular/core';
-import { OnInit }		 from '@angular/core';
-import { ComponentError} from '../../models/componentError';
+import { Component }	    from '@angular/core';
+import { OnInit }		    from '@angular/core';
+import { AlertMessage }     from '../../models/alertMessage';
 
 @Component({
     selector: 'site-home',
@@ -9,7 +9,7 @@ import { ComponentError} from '../../models/componentError';
 })
 
 export class SiteHome implements OnInit {
-	errors: ComponentError[] = [];
+	alerts: AlertMessage[] = [];
     constructor() { }
     ngOnInit() {
     }

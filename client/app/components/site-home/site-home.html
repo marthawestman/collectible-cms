@@ -1,8 +1,22 @@
 <div class="site-home-component landing-page">
 	<div class="inner landing-page-inner">
-		<cc-error [errors]='errors'></cc-error>
-		<log-in></log-in>
-		<users-create-quick [errors]='errors'></users-create-quick>
-		<users-lists-all></users-lists-all>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-12"><cc-alert [alerts]='alerts'></cc-alert></div>
+			</div>
+			<div class="row">
+				<div class="col-xs-4">
+					<div class="row">
+						<div class="col-xs-12"><log-in></log-in></div>
+					</div>
+					<div class="row">
+						<div class="col-xs-12"><users-create-quick [alerts]='alerts'></users-create-quick></div>
+					</div>
+				</div>
+				<div class="col-xs-8">
+					<users-lists-all></users-lists-all>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>

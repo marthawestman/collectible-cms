@@ -2,7 +2,7 @@ import { Component }     from '@angular/core';
 import { OnInit }        from '@angular/core';
 import { Input }         from '@angular/core';
 import { User }          from '../../../../models/user';
-import { ComponentError} from '../../../../models/componentError';
+import { AlertMessage }  from '../../../../models/alertMessage';
 import { UserService }   from '../../../../services/user/user.service';
 
 @Component({
@@ -12,7 +12,7 @@ import { UserService }   from '../../../../services/user/user.service';
 })
 
 export class UsersCreateQuickComponent implements OnInit {
-    @Input() errors: ComponentError[]
+    @Input() alerts: AlertMessage[]
     working: boolean = true;
 	email: string;
 	password: string;
@@ -20,15 +20,22 @@ export class UsersCreateQuickComponent implements OnInit {
     constructor(private userService: UserService) { }
     create() {
         this.working = true;
-        let user = new User();
+        let user: User = {
+            name: null,
+            _id: null,
+            email: this.email,
+            password: this.password,
+            roles: null
+        }
     	this.userService.create(user)
 	    .subscribe(
 			user => {
                 this.user = user;
+                this.alerts.push({ type: 'success', message: 'User created' });
             },
-		    err => this.errors.push({ type: 'error', message: err }),
+		    err => this.alerts.push({ type: 'error', message: err }),
 		    () => this.working = false
-		);
+		)
     }
     ngOnInit() {
     }
