@@ -6,9 +6,10 @@ import { AlertMessage }  from '../../../../models/alertMessage';
 import { UserService }   from '../../../../services/user/user.service';
 
 @Component({
-    selector: 'users-create-quick',
-    templateUrl: 'app/components/users/create/quick/quick.html',
-    styleUrls: ['app/components/users/create/quick/quick.css'],
+    moduleId: module.id,
+    selector: 'cc-users-create-quick',
+    templateUrl: 'view.html',
+    styleUrls: ['style.css'],
 })
 
 export class UsersCreateQuickComponent implements OnInit {

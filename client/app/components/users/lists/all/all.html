@@ -1,9 +1,0 @@
-<div class="components-users-lists-all">
-    <div class="users row">
-        <div class="col-xs-12">
-            <ul>
-                <li *ngFor="let user of users"><a routerLink="/u/{{ user._id }}">{{ user._id }}</a> {{ user.email }} <a href="#" (click)="deleteUser(user)">X</a></li>
-            </ul>
-        </div>
-    </div>
-</div>

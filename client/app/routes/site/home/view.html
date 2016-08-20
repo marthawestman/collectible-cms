@@ -2,19 +2,19 @@
 	<div class="inner landing-page-inner">
 		<div class="container-fluid">
 			<div class="row">
-				<div class="col-xs-12"><cc-alert [alerts]='alerts'></cc-alert></div>
+				<div class="col-xs-12"><cc-site-alert [alerts]='alerts'></cc-site-alert></div>
 			</div>
 			<div class="row">
 				<div class="col-xs-4">
 					<div class="row">
-						<div class="col-xs-12"><log-in></log-in></div>
+						<div class="col-xs-12"><cc-login></cc-login></div>
 					</div>
 					<div class="row">
-						<div class="col-xs-12"><users-create-quick [alerts]='alerts'></users-create-quick></div>
+						<div class="col-xs-12"><cc-users-create-quick [alerts]='alerts'></cc-users-create-quick></div>
 					</div>
 				</div>
 				<div class="col-xs-8">
-					<users-lists-all [alerts]='alerts'></users-lists-all>
+					<cc-users-lists-all [alerts]='alerts'></cc-users-lists-all>
 				</div>
 			</div>
 		</div>

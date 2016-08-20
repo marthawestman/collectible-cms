@@ -10,7 +10,7 @@ import { AuthenticateService }           from './services/authenticate/authentic
     selector: 'my-app',
     template: `
         <div class="public-app">
-            <main-menu></main-menu>
+            <cc-site-menu-main></cc-site-menu-main>
             <router-outlet></router-outlet>
         </div>
     `,

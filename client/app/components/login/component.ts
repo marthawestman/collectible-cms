@@ -1,17 +1,17 @@
-import { Component }    from '@angular/core';
-import { OnInit }       from '@angular/core';
-import { Headers }		from '@angular/http';
-import { User }         from '../../models/user';
-import { UserService }  from '../../services/user/user.service';
-import { AuthenticateService }	from '../../services/authenticate/authenticate.service';
+import { Component }                     from '@angular/core';
+import { OnInit }                        from '@angular/core';
+import { User }                          from '../../models/user';
+import { UserService }                   from '../../services/user/user.service';
+import { AuthenticateService }	         from '../../services/authenticate/authenticate.service';
 
 @Component({
-    selector: 'log-in',
-    templateUrl: 'app/components/log-in/log-in.html',
-    styleUrls: ['app/components/log-in/log-in.css'],
+    moduleId: module.id,
+    selector: 'cc-login',
+    templateUrl: 'view.html',
+    styleUrls: ['style.css'],
 })
 
-export class LogIn implements OnInit {
+export class LoginComponent implements OnInit {
 	name: string;
 	password: string;
     constructor(private authService: AuthenticateService, private userService: UserService) { }

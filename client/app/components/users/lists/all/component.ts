@@ -5,9 +5,10 @@ import { AlertMessage }                 from '../../../../models/alertMessage';
 import { UserService }                  from '../../../../services/user/user.service';
 
 @Component({
-    selector: 'users-lists-all',
-    templateUrl: 'app/components/users/lists/all/all.html',
-    styleUrls: ['app/components/users/lists/all/all.css'],
+    moduleId: module.id,
+    selector: 'cc-users-lists-all',
+    templateUrl: 'view.html',
+    styleUrls: ['style.css'],
 })
 
 export class UsersListsAllComponent implements OnInit {
@@ -31,7 +32,7 @@ export class UsersListsAllComponent implements OnInit {
                     this.users = users;
                     this.working = false;
                 },
-                err => console.log('error: ' + err)
+                err => this.alerts.push({ type: 'error', message: err })
             );
     }
 };

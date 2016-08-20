@@ -18,11 +18,11 @@ var password_reset_component_1 = require('./components/password-reset/password-r
 var component_1 = require('./routes/site/home/component');
 var component_2 = require('./routes/users/profile/component');
 // Components.
-var alert_1 = require('./components/alert/alert');
-var main_menu_component_1 = require('./components/main-menu/main-menu.component');
-var log_in_component_1 = require('./components/log-in/log-in.component');
-var all_component_1 = require('./components/users/lists/all/all.component');
-var quick_component_1 = require('./components/users/create/quick/quick.component');
+var component_3 = require('./components/site/alert/component');
+var component_4 = require('./components/site/menu/main/component');
+var component_5 = require('./components/login/component');
+var component_6 = require('./components/users/lists/all/component');
+var component_7 = require('./components/users/create/quick/component');
 var appRoutes = [
     { path: '', component: component_1.RoutesSiteHomeComponent },
     { path: 'password-reset', component: password_reset_component_1.PasswordReset },
@@ -40,11 +40,11 @@ var AppModule = (function () {
             ],
             declarations: [
                 app_component_1.AppComponent,
-                alert_1.AlertComponent,
-                main_menu_component_1.MainMenu,
-                log_in_component_1.LogIn,
-                all_component_1.UsersListsAllComponent,
-                quick_component_1.UsersCreateQuickComponent
+                component_3.SiteAlertComponent,
+                component_4.SiteMenuMainComponent,
+                component_5.LoginComponent,
+                component_6.UsersListsAllComponent,
+                component_7.UsersCreateQuickComponent
             ],
             bootstrap: [app_component_1.AppComponent]
         }), 

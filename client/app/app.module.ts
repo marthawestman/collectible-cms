@@ -8,11 +8,11 @@ import { PasswordReset } 		         from './components/password-reset/password-r
 import { RoutesSiteHomeComponent }       from './routes/site/home/component';
 import { RoutesUsersProfileComponent }   from './routes/users/profile/component';
 // Components.
-import { AlertComponent }                from './components/alert/alert';
-import { MainMenu }                      from './components/main-menu/main-menu.component';
-import { LogIn }                         from './components/log-in/log-in.component';
-import { UsersListsAllComponent }        from './components/users/lists/all/all.component';
-import { UsersCreateQuickComponent }     from './components/users/create/quick/quick.component';
+import { SiteAlertComponent }            from './components/site/alert/component';
+import { SiteMenuMainComponent }         from './components/site/menu/main/component';
+import { LoginComponent }                from './components/login/component';
+import { UsersListsAllComponent }        from './components/users/lists/all/component';
+import { UsersCreateQuickComponent }     from './components/users/create/quick/component';
 
 const appRoutes: Routes = [
     { path: '', component: RoutesSiteHomeComponent },
@@ -28,9 +28,9 @@ const appRoutes: Routes = [
 	],
 	declarations: [ 
         AppComponent, 
-        AlertComponent,
-        MainMenu, 
-        LogIn,
+        SiteAlertComponent,
+        SiteMenuMainComponent, 
+        LoginComponent,
         UsersListsAllComponent,
         UsersCreateQuickComponent
     ],

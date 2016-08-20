@@ -24,7 +24,7 @@ var AppComponent = (function () {
     AppComponent = __decorate([
         core_1.Component({
             selector: 'my-app',
-            template: "\n        <div class=\"public-app\">\n            <main-menu></main-menu>\n            <router-outlet></router-outlet>\n        </div>\n    ",
+            template: "\n        <div class=\"public-app\">\n            <cc-site-menu-main></cc-site-menu-main>\n            <router-outlet></router-outlet>\n        </div>\n    ",
             providers: [
                 platform_browser_1.Title,
                 http_1.HTTP_PROVIDERS,
