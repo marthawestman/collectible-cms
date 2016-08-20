@@ -1,5 +1,8 @@
 import { Injectable }									from '@angular/core';
 import { Http, Headers, Response, RequestOptionsArgs }  from '@angular/http';
+import { Observable }                                   from 'rxjs/Observable';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
 
 @Injectable()
 export class HttpService {
@@ -24,7 +27,7 @@ export class HttpService {
 	 *	       );
 	 */
     post(url: string, body: any, options?: RequestOptionsArgs) {
-    	return this.http.post(url, body, options);
+    	return this.http.post(url, body, options)
     }
     /**
      * Issue post request with 'applicaton/json', and x-access-token header and
@@ -47,14 +50,15 @@ export class HttpService {
 	 *	           () => console.log('Authentication Complete')
 	 *	       );
 	 */
-    postSimple(url: string, body: any, token?: string) {
+    postSimple(url: string, body: any, token?: string) : Observable<any> {
     	var headers = new Headers();
     	headers.append('Content-Type', 'application/json');
         if (token) {
             headers.append('x-access-token', token);
         }
     	return this.post(url, JSON.stringify(body), { headers: headers })
-    		.map( (res) => { return res.json(); })
+    		.map(res => res.json())
+            .catch(this.handleError);
     }
     /**
      * Issue get request with x-access-token header and return deserialized
@@ -67,12 +71,23 @@ export class HttpService {
      *
      * @example
      */
-    getSimple(url: string, token?: string) {
+    getSimple(url: string, token?: string) : Observable<any> {
         var headers = new Headers();
         if (token) {
             headers.append('x-access-token', token);
         }
         return this.get(url, { headers: headers })
-            .map( (res) => { return res.json(); })
+            .map(res => res.json())
+            .catch(this.handleError);
+    }
+    /**
+     * Return the most human friendly message that may be obtained.
+     */
+    handleError(error: any) : Observable<any> {
+        if (typeof(error['_body']) != 'undefined') {
+            var json = JSON.parse(error._body);
+            return Observable.throw(json.message);
+        }
+        return Observable.throw(error);
     }
 }

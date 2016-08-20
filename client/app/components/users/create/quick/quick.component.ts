@@ -1,7 +1,9 @@
-import { Component }    from '@angular/core';
-import { OnInit }       from '@angular/core';
-import { User }         from '../../../../models/user';
-import { UserService }  from '../../../../services/user/user.service';
+import { Component }     from '@angular/core';
+import { OnInit }        from '@angular/core';
+import { Input }         from '@angular/core';
+import { User }          from '../../../../models/user';
+import { ComponentError} from '../../../../models/componentError';
+import { UserService }   from '../../../../services/user/user.service';
 
 @Component({
     selector: 'users-create-quick',
@@ -10,6 +12,7 @@ import { UserService }  from '../../../../services/user/user.service';
 })
 
 export class UsersCreateQuickComponent implements OnInit {
+    @Input() errors: ComponentError[]
     working: boolean = true;
 	email: string;
 	password: string;
@@ -23,7 +26,7 @@ export class UsersCreateQuickComponent implements OnInit {
 			user => {
                 this.user = user;
             },
-		    err => console.log(err),
+		    err => this.errors.push({ type: 'error', message: err }),
 		    () => this.working = false
 		);
     }

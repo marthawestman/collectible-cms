@@ -8,9 +8,11 @@ import { PasswordReset } 		      from './components/password-reset/password-rese
 import { SiteHome }                   from './components/site-home/site-home.component';
 import { UsersViewsFullComponent }    from './components/users/views/full/full.component';
 // Components.
+import { ErrorComponent }             from './components/error/error';
 import { MainMenu }                   from './components/main-menu/main-menu.component';
 import { LogIn }                      from './components/log-in/log-in.component';
 import { UsersListsAllComponent }     from './components/users/lists/all/all.component';
+import { UsersCreateQuickComponent }  from './components/users/create/quick/quick.component';
 
 const appRoutes: Routes = [
     { path: '', component: SiteHome },
@@ -26,9 +28,11 @@ const appRoutes: Routes = [
 	],
 	declarations: [ 
         AppComponent, 
+        ErrorComponent,
         MainMenu, 
         LogIn,
-        UsersListsAllComponent
+        UsersListsAllComponent,
+        UsersCreateQuickComponent
     ],
 	bootstrap: [ AppComponent ]
 })
