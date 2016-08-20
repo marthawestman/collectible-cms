@@ -13,8 +13,8 @@ import { AlertMessage }  from '../../../models/alertMessage';
 export class SiteAlertComponent implements OnInit {
     @Input() alerts: AlertMessage[]
     constructor() { }
-    dismiss() {
-        
+    close(i) {
+        this.alerts.splice(i, 1);
     }
     ngOnInit() {
     }

@@ -1,6 +1,6 @@
-import { Component }                     from '@angular/core';
-import { OnInit }                        from '@angular/core';
+import { Component, Input, OnInit }      from '@angular/core';
 import { User }                          from '../../models/user';
+import { AlertMessage }                  from '../../models/alertMessage';
 import { UserService }                   from '../../services/user/user.service';
 import { AuthenticateService }	         from '../../services/authenticate/authenticate.service';
 
@@ -12,24 +12,22 @@ import { AuthenticateService }	         from '../../services/authenticate/authen
 })
 
 export class LoginComponent implements OnInit {
+    @Input() alerts: AlertMessage[];
 	name: string;
 	password: string;
+    working: boolean = false;
     constructor(private authService: AuthenticateService, private userService: UserService) { }
     logIn() {
+        this.working = true;
     	this.authService.authenticate(this.name, this.password)
 	    .subscribe(
-			token => this.success(token),
-		    err => this.failure(err),
-		    () => console.log('Authentication Complete')
+			token => {
+                this.authService.setToken(token);
+                this.alerts.push({ type: 'success', message: 'Your are now logged in.' });
+            },
+		    err => { this.alerts.push({ type: 'error', message: err }); },
+		    () => { this.working = false; }
 		);
-    }
-    success(token) {
-		this.authService.setToken(token);
-		alert('Authenticated!');
-    }
-    failure(err) {
-    	console.log(err);
-    	alert(err);
     }
     ngOnInit() {
     }

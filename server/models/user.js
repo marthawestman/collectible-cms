@@ -27,14 +27,21 @@ userSchema.pre('save', function(next) {
 userSchema.methods.fullName = function() {
     return this.name.first + " " + this.name.last;
 };
+userSchema.methods.hasRole = function(role) {
+    var hasRole = false;
+    if ((typeof(this.roles) != 'undefined') && (this.roles != null) && this.roles.length) {
+        hasRole = (this.roles.indexOf(role) > -1);
+    }
+    return hasRole
+}
 userSchema.methods.isAdmin = function() {
-    return this.roles.indexOf('admin') > -1;
+    return this.hasRole('admin');
 };
 userSchema.methods.isUser = function() {
-    return this.roles.indexOf('user') > -1;
+    return this.hasRole('user');
 };
 userSchema.methods.isAnonymous = function() {
-    return this.roles.indexOf('anonymous') > -1;
+    return this.hasRole('anonymous');
 };
 
 module.exports = mongoose.model('User', userSchema);
