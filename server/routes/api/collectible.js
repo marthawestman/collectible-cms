@@ -45,7 +45,7 @@ var Collectible = require('../../models/collectible');
 
 module.exports = function(app, router) {
     /**
-     * @api {get} /api/v1/collectible Read All
+     * @api {get} /collectible Read All
      * @apiPermission apiPermissionAdmin
      * @apiGroup apiGroupCollectible
      * @apiName ReadAll
@@ -88,7 +88,7 @@ module.exports = function(app, router) {
         }
     });
     /**
-     * @api {get} /api/v1/collectible/:id Read Single
+     * @api {get} /collectible/:id Read Single
      * @apiPermission apiPermissionPublic
      * @apiGroup apiGroupCollectible
      * @apiName ReadSingle
@@ -135,7 +135,7 @@ module.exports = function(app, router) {
         });
     });
     /**
-     * @api {post} /api/v1/collectible Create
+     * @api {post} /collectible Create
      * @apiPermission apiPermissionUser
      * @apiGroup apiGroupCollectible
      * @apiName Create
@@ -210,7 +210,7 @@ module.exports = function(app, router) {
         }
     });
     /**
-     * @api {delete} /api/v1/collectible/:id Delete
+     * @api {delete} /collectible/:id Delete
      * @apiPermission apiPermissionUser
      * @apiGroup apiGroupCollectible
      * @apiName Delete
@@ -251,7 +251,7 @@ module.exports = function(app, router) {
         });
     });
     /**
-     * @api {patch} /api/v1/collectible/:id Update
+     * @api {patch} /collectible/:id Update
      * @apiPermission apiPermissionUser
      * @apiGroup apiGroupCollectible
      * @apiName Update

@@ -1,0 +1,17 @@
+<div class="users-create-quick">
+	<div class="inner">
+		<div class="row email">
+			<div class="col-xs-4">Email</div>
+			<div class="col-xs-8"><input name="email" [(ngModel)]="email" class="form-control" /></div>
+		</div>
+		<div class="row password">
+			<div class="col-xs-4">Password</div>
+			<div class="col-xs-8"><input type="password" name="password" [(ngModel)]="password" class="form-control" /></div>
+		</div>
+		<div class="row create">
+			<div class="col-xs-12">
+				<button (click)="create()" class="form-control">Create</button>
+			</div>
+		</div>
+	</div>
+</div>

@@ -17,7 +17,7 @@ export class UsersListsAllComponent implements OnInit {
     }
     ngOnInit() {
         this.working = true;
-        this.userService.getUsers()
+        this.userService.readAll()
             .subscribe(
                 users => { 
                     this.users = users;

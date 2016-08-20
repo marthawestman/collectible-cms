@@ -10,13 +10,23 @@ import { UserService }              from '../../../../services/user/user.service
 })
 
 export class UsersViewsFullComponent implements OnInit {
-    userId: string;
     working: boolean = false;
-    users : User;
+    loaded: boolean = false;
+    userId: string;
+    user : User;
     constructor(private route: ActivatedRoute, private userService: UserService) {
         this.userId = route.snapshot.params['id'];        
     }
     ngOnInit() {
         this.working = true;
+        this.userService.read(this.userId)
+            .subscribe(
+                user => {
+                    this.user = user;
+                    this.loaded = true;
+                },
+                err => console.log('error: ' + err),
+                () => this.working = false
+            );
     }
 };

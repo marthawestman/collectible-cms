@@ -27,7 +27,7 @@ var User = require('../../models/user');
 
 module.exports = function(app, router) {
     /**
-     * @api {get} /api/v1/user Read all
+     * @api {get} /user Read all
      * @apiPermission apiPermissionAdmin
      * @apiGroup apiGroupUser
      * @apiName ReadAll
@@ -78,7 +78,7 @@ module.exports = function(app, router) {
         }
     });
     /**
-     * @api {get} /api/v1/user/:id Read single
+     * @api {get} /user/:id Read single
      * @apiPermission apiPermissionAdmin
      * @apiGroup apiGroupUser
      * @apiName ReadSingle
@@ -129,7 +129,7 @@ module.exports = function(app, router) {
         }
     });
     /**
-     * @api {post} /api/v1/user Create
+     * @api {post} /user Create
      * @apiPermission apiPermissionAdmin
      * @apiGroup apiGroupUser
      * @apiName Create
@@ -196,7 +196,7 @@ module.exports = function(app, router) {
         }
     });
     /**
-     * @api {patch} /api/v1/user/:id Update
+     * @api {patch} /user/:id Update
      * @apiPermission apiPermissionUser
      * @apiGroup apiGroupUser
      * @apiName Update
@@ -280,7 +280,7 @@ module.exports = function(app, router) {
         }
     });
     /**
-     * @api {delete} /api/v1/user/:id Delete
+     * @api {delete} /user/:id Delete
      * @apiPermission apiPermissionAdmin
      * @apiPermission apiPermissionUser
      * @apiGroup apiGroupUser
