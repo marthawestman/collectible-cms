@@ -12,17 +12,25 @@
 				</div>
 				<div class="col-xs-6 right">
 					<div class="menu">
-						<div *ngIf="currentUser.isRegistered()" class="menu-item profile">
-							<span class="fa fa-user" aria-hidden="true"></span>
-							<span>{{ currentUser.email }}</span>
-						</div>
-						<div *ngIf="!currentUser.isRegistered()" class="menu-item profile">
-							<span class="fa fa-user-secret" aria-hidden="true"></span>
-							<span>Anonymous</span>
-						</div>
-						<div *ngIf="currentUser.isAdmin()" class="menu-item admin">
-							<span class="fa fa-cog" aria-hidden="true"></span>
-							<a routerLink="/admin">Admin</a>
+						<div class="menu-item profile">
+							<div class="dropdown">
+  							    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+	  							    <span *ngIf="currentUser.isRegistered()" class="fa fa-user" aria-hidden="true"></span>
+							        <span *ngIf="currentUser.isRegistered()">{{ currentUser.email }}</span>
+	  							    <span *ngIf="!currentUser.isRegistered()" class="fa fa-user-secret" aria-hidden="true"></span>
+							        <span *ngIf="!currentUser.isRegistered()">Anonymous</span>
+									<span><span class="caret"></span></span>
+								</button>
+								<ul class="dropdown-menu">
+									<li *ngIf="currentUser.isAdmin()">
+										<a routerLink="/admin">
+											<span class="fa fa-cog" aria-hidden="true"></span>
+											<span class="text">Site Administration</span>
+										</a>
+									</li>
+									<li *ngIf="currentUser.isRegistered()"><a href="#" (click)="logout()">Logout</a></li>
+								</ul>
+							</div>						
 						</div>
 					</div>
 				</div>

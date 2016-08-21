@@ -3,7 +3,6 @@
 	height: 3em;
 	background: linear-gradient(to bottom, #ffffff, #f0f0f0);
 	border-bottom: 1px solid #e0e0e0;
-	overflow: hidden;
 }
 .cc-site-menu-main > .inner {
 	max-width: 1200px;
@@ -34,9 +33,29 @@
 .cc-site-menu-main > .inner .menu > .menu-item {
 	display: table-cell;
 	vertical-align: middle;
-	width: 8em;
+	padding-right: 1em;
 }
+.cc-site-menu-main > .inner .menu > .menu-item:last-child {
+	padding-right: 0;
+}
+
 .cc-site-menu-main > .inner .menu > .menu-item .fa {
 	font-size: 1.5em;
 	margin-right: 0.10em;
+}
+.cc-site-menu-main > .inner .menu > .menu-item button {
+	display: table;
+	background: linear-gradient(to bottom, #333333, #888888);
+	height: initial;
+}
+.cc-site-menu-main > .inner .menu > .menu-item button > span {
+	display: table-cell;
+	vertical-align: middle;
+	padding-right: 0.5em;
+}
+.cc-site-menu-main > .inner .menu > .menu-item button > span:last-child {
+	padding-right: 0;
+}
+.cc-site-menu-main > .inner .menu > .menu-item ul.dropdown-menu {
+	font-size: inherit;
 }

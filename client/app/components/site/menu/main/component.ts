@@ -13,6 +13,9 @@ import { UserService }     from '../../../../services/user/user.service';
 export class SiteMenuMainComponent implements OnInit {
 	currentUser: User;
     constructor(private userService: UserService) { }
+    logout() {
+    	localStorage.removeItem('token');
+    }
     ngOnInit() {
     	this.currentUser = this.userService.getCurrentUser();
     }
