@@ -6,6 +6,7 @@ import { AppComponent }			         from './app.component';
 // Routes, Landing pages.
 import { PasswordReset } 		         from './components/password-reset/password-reset.component';
 import { RoutesSiteHomeComponent }       from './routes/site/home/component';
+import { RoutesAdminHomeComponent }      from './routes/admin/home/component';
 import { RoutesUsersProfileComponent }   from './routes/users/profile/component';
 // Components.
 import { SiteAlertComponent }            from './components/site/alert/component';
@@ -16,6 +17,7 @@ import { UsersCreateQuickComponent }     from './components/users/create/quick/c
 
 const appRoutes: Routes = [
     { path: '', component: RoutesSiteHomeComponent },
+    { path: 'admin', component :RoutesAdminHomeComponent },
     { path: 'password-reset', component: PasswordReset },
     { path: 'u/:id', component: RoutesUsersProfileComponent }
 ];
