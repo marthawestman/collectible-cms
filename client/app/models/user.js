@@ -8,6 +8,17 @@ var User = (function () {
         }
         return false;
     };
+    ;
+    User.prototype.hasRole = function (role) {
+        var hasRole = false;
+        if (this.isRegistered() && this.roles.indexOf(role) > -1) {
+            hasRole = true;
+        }
+        return hasRole;
+    };
+    User.prototype.isAdmin = function () {
+        return this.hasRole('admin');
+    };
     return User;
 }());
 exports.User = User;

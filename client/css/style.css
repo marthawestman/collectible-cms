@@ -36,3 +36,14 @@
     margin-right: auto;
     padding: 1em;
 }
+
+.cc-absolute-loading {
+    width: 4em;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 12em;
+}
+.cc-absolute-loading .fa {
+    font-size: 4em;
+    color: #888888;
+}

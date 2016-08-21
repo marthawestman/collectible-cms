@@ -6,24 +6,13 @@
 					<cc-site-alert [alerts]='alerts'></cc-site-alert>
 				</div>
 			</div>
-			<div class="row welcome">
-				<div class="col-xs-12">
-					<div *ngIf="currentUser.isRegistered()">
-						Welcome {{ currentUser.name.first }}
-					</div>
-				</div>
-			</div>
 			<div class="row main">
 				<div class="col-xs-4">
 					<div class="row">
 						<div class="col-xs-12"><cc-login [alerts]='alerts'></cc-login></div>
 					</div>
-					<div class="row">
-						<div class="col-xs-12"><cc-users-create-quick [alerts]='alerts'></cc-users-create-quick></div>
-					</div>
 				</div>
 				<div class="col-xs-8">
-					<cc-users-lists-all [alerts]='alerts'></cc-users-lists-all>
 				</div>
 			</div>
 		</div>

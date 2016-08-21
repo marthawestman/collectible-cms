@@ -11,5 +11,15 @@ export class User {
 			return true;
 		}
 		return false;
+	};
+	hasRole(role: string) : boolean {
+		var hasRole = false;
+		if (this.isRegistered() && this.roles.indexOf(role) > -1) {
+			hasRole = true;
+		}
+		return hasRole;
+	}
+	isAdmin(): boolean {
+		return this.hasRole('admin');
 	}
 }

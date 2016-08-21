@@ -11,7 +11,9 @@ import { UserService }     from '../../../../services/user/user.service';
 })
 
 export class SiteMenuMainComponent implements OnInit {
+	currentUser: User;
     constructor(private userService: UserService) { }
     ngOnInit() {
+    	this.currentUser = this.userService.getCurrentUser();
     }
 };

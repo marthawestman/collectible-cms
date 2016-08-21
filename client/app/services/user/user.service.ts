@@ -1,6 +1,5 @@
 import { Injectable }	from '@angular/core';
 import { User }			from '../../models/user';
-import { USERS }		from '../../mocks/user';
 import { HttpService }	from '../http/http.service';
 import { AuthenticateService }	from '../authenticate/authenticate.service';
 
@@ -91,6 +90,7 @@ export class UserService {
         if (typeof(token) != 'undefined' && token != null) {
             var decoded = jwt_decode(token);
             user._id = decoded._id;
+            user.email = decoded.email;
             user.name = decoded.name;
             user.roles = decoded.roles;
         }

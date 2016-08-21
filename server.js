@@ -34,6 +34,7 @@ app.use('/api/v1', router);
 app.use('/apidoc', express.static('apidoc'));
 app.use('/client', express.static('client'));
 app.use('/', express.static('client'));
+app.use('*', express.static('client'));
 
 // Start the server
 app.listen(port);

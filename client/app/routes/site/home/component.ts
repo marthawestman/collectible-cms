@@ -18,6 +18,5 @@ export class RoutesSiteHomeComponent implements OnInit {
     }
     ngOnInit() {
     	this.currentUser = this.userService.getCurrentUser();
-    	console.log(this.currentUser);
     }
 };

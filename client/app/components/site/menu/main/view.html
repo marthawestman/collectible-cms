@@ -1,7 +1,32 @@
-<div class="cc-site-main-menu component">
+<div class="cc-site-menu-main component">
 	<div class="inner component-inner">
-		<div class="menu-item home">
-			<a routerLink="/">Home</a>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-6 left">
+					<div class="menu">
+						<div class="menu-item home">
+							<span class="fa fa-home" aria-hidden="true"></span>
+							<a routerLink="/">Home</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-6 right">
+					<div class="menu">
+						<div *ngIf="currentUser.isRegistered()" class="menu-item profile">
+							<span class="fa fa-user" aria-hidden="true"></span>
+							<span>{{ currentUser.email }}</span>
+						</div>
+						<div *ngIf="!currentUser.isRegistered()" class="menu-item profile">
+							<span class="fa fa-user-secret" aria-hidden="true"></span>
+							<span>Anonymous</span>
+						</div>
+						<div *ngIf="currentUser.isAdmin()" class="menu-item admin">
+							<span class="fa fa-cog" aria-hidden="true"></span>
+							<a routerLink="/admin">Admin</a>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

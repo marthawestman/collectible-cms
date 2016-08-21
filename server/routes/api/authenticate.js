@@ -80,6 +80,7 @@ yRQYnWzskCZUxPwaQupWkiUzKELZ49eM7oWxAQK_ZXw"
                     // create a token
                     var payload = {
                         "_id": user._doc._id,
+                        "email": user.email,
                         "name": {
                             "first": user.name.first
                         },
