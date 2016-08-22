@@ -19,6 +19,12 @@ var User = (function () {
     User.prototype.isAdmin = function () {
         return this.hasRole('admin');
     };
+    User.prototype.isUser = function () {
+        return this.hasRole('user');
+    };
+    User.prototype.isAnonymous = function () {
+        return this.hasRole('anonymous');
+    };
     return User;
 }());
 exports.User = User;

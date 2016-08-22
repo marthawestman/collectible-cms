@@ -1,0 +1,25 @@
+.cc-routes-users-edit {
+	
+}
+.cc-routes-users-edit input.form-control[type="checkbox"] {
+	max-width: 2em;
+	display: inline-block;
+}
+.cc-routes-users-edit .row.name {
+	margin-top: 2em;
+}
+.cc-routes-users-edit .row.image {
+	margin-top: 2em;
+}
+.cc-routes-users-edit .row.roles {
+	margin-top: 2em;
+}
+.cc-routes-users-edit .row.roles input {
+	margin-left: 2em;
+}
+.cc-routes-users-edit .row.roles input:first-child {
+	margin-left: 0;
+}
+.cc-routes-users-edit .row.submit {
+	margin-top: 2em;
+}

@@ -22,6 +22,12 @@ export class User {
 	isAdmin(): boolean {
 		return this.hasRole('admin');
 	}
+	isUser(): boolean {
+		return this.hasRole('user');
+	}
+	isAnonymous(): boolean {
+		return this.hasRole('anonymous');
+	}
 }
 
 export class CurrentUser {

@@ -18,17 +18,19 @@ var password_reset_component_1 = require('./components/password-reset/password-r
 var component_1 = require('./routes/site/home/component');
 var component_2 = require('./routes/admin/home/component');
 var component_3 = require('./routes/users/profile/component');
+var component_4 = require('./routes/users/edit/component');
 // Components.
-var component_4 = require('./components/site/alert/component');
-var component_5 = require('./components/site/menu/main/component');
-var component_6 = require('./components/login/component');
-var component_7 = require('./components/users/lists/all/component');
-var component_8 = require('./components/users/create/quick/component');
+var component_5 = require('./components/site/alert/component');
+var component_6 = require('./components/site/menu/main/component');
+var component_7 = require('./components/login/component');
+var component_8 = require('./components/users/lists/all/component');
+var component_9 = require('./components/users/create/quick/component');
 var appRoutes = [
     { path: '', component: component_1.RoutesSiteHomeComponent },
     { path: 'admin', component: component_2.RoutesAdminHomeComponent },
     { path: 'password-reset', component: password_reset_component_1.PasswordReset },
-    { path: 'u/:id', component: component_3.RoutesUsersProfileComponent }
+    { path: 'u/:id', component: component_3.RoutesUsersProfileComponent },
+    { path: 'u/:id/edit', component: component_4.RoutesUsersEditComponent }
 ];
 var AppModule = (function () {
     function AppModule() {
@@ -42,11 +44,11 @@ var AppModule = (function () {
             ],
             declarations: [
                 app_component_1.AppComponent,
-                component_4.SiteAlertComponent,
-                component_5.SiteMenuMainComponent,
-                component_6.LoginComponent,
-                component_7.UsersListsAllComponent,
-                component_8.UsersCreateQuickComponent
+                component_5.SiteAlertComponent,
+                component_6.SiteMenuMainComponent,
+                component_7.LoginComponent,
+                component_8.UsersListsAllComponent,
+                component_9.UsersCreateQuickComponent
             ],
             bootstrap: [app_component_1.AppComponent]
         }), 
