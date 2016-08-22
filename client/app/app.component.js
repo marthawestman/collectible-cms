@@ -14,26 +14,39 @@ var http_1 = require('@angular/http');
 var http_service_1 = require('./services/http/http.service');
 var user_service_1 = require('./services/user/user.service');
 var authenticate_service_1 = require('./services/authenticate/authenticate.service');
+var config_service_1 = require('./services/config/config.service');
 var AppComponent = (function () {
-    function AppComponent(titleService) {
+    function AppComponent(titleService, configService) {
         this.titleService = titleService;
+        this.configService = configService;
+        this.config = null;
+        this.working = false;
     }
     AppComponent.prototype.ngOnInit = function () {
-        this.titleService.setTitle("Collectible CMS 2");
+        var _this = this;
+        this.working = true;
+        this.configService.read().subscribe(function (configContainer) {
+            if (configContainer) {
+                _this.configContainer = configContainer;
+                _this.titleService.setTitle(_this.configContainer.config.siteTitle);
+            }
+        }, function (err) { console.log(err); }, function () { _this.working = false; });
     };
     AppComponent = __decorate([
         core_1.Component({
             selector: 'my-app',
-            template: "\n        <div class=\"public-app\">\n            <cc-site-menu-main></cc-site-menu-main>\n            <router-outlet></router-outlet>\n        </div>\n    ",
+            template: "\n        <div class=\"public-app\">\n            <cc-site-menu-main></cc-site-menu-main>\n            <div *ngIf=\"!working && configContainer.config.motd.length\" class=\"motd\">\n                {{ configContainer.config.motd }}\n            </div>\n            <router-outlet></router-outlet>\n        </div>\n    ",
+            styles: ["\n        .motd {\n            padding: 0.4em;\n            font-size: 0.90em;\n            background-color: #f9f9f9;\n            color: #00a000;\n            border-top: 1px solid #d0d0d0;\n            border-bottom: 1px solid #e0e0e0;\n            text-align: center;\n        }\n    "],
             providers: [
                 platform_browser_1.Title,
                 http_1.HTTP_PROVIDERS,
                 http_service_1.HttpService,
                 user_service_1.UserService,
-                authenticate_service_1.AuthenticateService
+                authenticate_service_1.AuthenticateService,
+                config_service_1.ConfigService
             ]
         }), 
-        __metadata('design:paramtypes', [platform_browser_1.Title])
+        __metadata('design:paramtypes', [platform_browser_1.Title, config_service_1.ConfigService])
     ], AppComponent);
     return AppComponent;
 }());

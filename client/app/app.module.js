@@ -25,6 +25,7 @@ var component_6 = require('./components/site/menu/main/component');
 var component_7 = require('./components/login/component');
 var component_8 = require('./components/users/lists/all/component');
 var component_9 = require('./components/users/create/quick/component');
+var component_10 = require('./components/site/config/component');
 var appRoutes = [
     { path: '', component: component_1.RoutesSiteHomeComponent },
     { path: 'admin', component: component_2.RoutesAdminHomeComponent },
@@ -48,7 +49,8 @@ var AppModule = (function () {
                 component_6.SiteMenuMainComponent,
                 component_7.LoginComponent,
                 component_8.UsersListsAllComponent,
-                component_9.UsersCreateQuickComponent
+                component_9.UsersCreateQuickComponent,
+                component_10.SiteConfigComponent
             ],
             bootstrap: [app_component_1.AppComponent]
         }), 

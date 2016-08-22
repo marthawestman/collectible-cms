@@ -37,6 +37,9 @@
     padding: 1em;
 }
 
+/**
+ * Initial load.
+ */
 .cc-absolute-loading {
     width: 4em;
     margin-left: auto;
@@ -46,4 +49,15 @@
 .cc-absolute-loading .fa {
     font-size: 4em;
     color: #888888;
+}
+
+/**
+ * Generic component widget styling.
+ */
+.component.widget .component-inner.widget-inner {
+    padding: 1em;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    background: linear-gradient(to bottom, #ffffff, #f0f0f0);
+    box-shadow: #c0c0c0 4px 4px 6px;
 }

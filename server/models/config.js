@@ -8,6 +8,8 @@ var configSchema = new Schema({
     siteTitle: String,
     // Description of the site.
     siteDescription: String,
+    // Message Of The Day.
+    motd: String
 });
 
 module.exports = mongoose.model('Config', configSchema);

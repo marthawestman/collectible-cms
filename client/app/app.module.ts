@@ -15,6 +15,7 @@ import { SiteMenuMainComponent }         from './components/site/menu/main/compo
 import { LoginComponent }                from './components/login/component';
 import { UsersListsAllComponent }        from './components/users/lists/all/component';
 import { UsersCreateQuickComponent }     from './components/users/create/quick/component';
+import { SiteConfigComponent }           from './components/site/config/component';
 
 const appRoutes: Routes = [
     { path: '', component: RoutesSiteHomeComponent },
@@ -36,9 +37,9 @@ const appRoutes: Routes = [
         SiteMenuMainComponent, 
         LoginComponent,
         UsersListsAllComponent,
-        UsersCreateQuickComponent
+        UsersCreateQuickComponent,
+        SiteConfigComponent
     ],
 	bootstrap: [ AppComponent ]
 })
-
 export class AppModule { }
