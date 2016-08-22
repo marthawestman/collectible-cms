@@ -5,9 +5,9 @@ var Schema = mongoose.Schema;
 // Set up a mongoose model and pass it using module.exports
 var configSchema = new Schema({
     // Title of the site.
-    title: String,
+    siteTitle: String,
     // Description of the site.
-    description: String,
+    siteDescription: String,
 });
 
 module.exports = mongoose.model('Config', configSchema);

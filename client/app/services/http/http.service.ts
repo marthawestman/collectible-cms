@@ -135,6 +135,10 @@ export class HttpService {
     handleError(error: any) : Observable<any> {
         if (typeof(error['_body']) != 'undefined') {
             var json = JSON.parse(error._body);
+            var message = json.message;
+            if (message == 'SyntaxError: Unexpected token o in JSON at position 1') {
+                message = 'Network failure. Did the server go away?';
+            }
             return Observable.throw(json.message);
         }
         return Observable.throw(error);
