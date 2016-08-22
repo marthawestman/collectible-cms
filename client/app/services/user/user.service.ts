@@ -62,6 +62,14 @@ export class UserService {
                 return json.data
             });
     }
+    update(user: User) {
+        return this.httpService.patchSimple('/api/v1/user/' + user._id, user, localStorage.getItem('token'))
+            .map( (json) => {
+                if (!json.status)
+                    throw json.message;
+                return json.data
+            });
+    }
     /**
      * Delete single user.
      *

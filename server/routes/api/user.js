@@ -270,8 +270,16 @@ module.exports = function(app, router) {
                 if (err) {
                     res.notFound();
                 }
-                if (userPatch.name != null && userPatch.name.first != null) {
-                    user.name.first = userPatch.name.first;
+                if (userPatch.name != null) {
+                    user.name.first  = (userPatch.name.first != null)  ? userPatch.name.first  : user.name.first;
+                    user.name.middle = (userPatch.name.middle != null) ? userPatch.name.middle : user.name.middle;
+                    user.name.last   = (userPatch.name.last != null)   ? userPatch.name.last   : user.name.last;
+                }
+                user.image    = (userPatch.image != null)    ? userPatch.image    : user.image;
+                user.password = (userPatch.password != null) ? userPatch.password : user.password;
+                user.email    = (userPatch.email != null)    ? userPatch.email    : user.email;
+                if (req.user.isAdmin()) {
+                    user.roles = (userPatch.roles != null && userPatch.roles.length) ? userPatch.roles : user.roles;
                 }
                 user.save(function(err) {
                     if (err) {

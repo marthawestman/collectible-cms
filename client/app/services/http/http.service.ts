@@ -29,6 +29,9 @@ export class HttpService {
     post(url: string, body: any, options?: RequestOptionsArgs) {
     	return this.http.post(url, body, options)
     }
+    patch(url: string, body: any, options?: RequestOptionsArgs) {
+        return this.http.patch(url, body, options)
+    }
     delete(url: string, options?: RequestOptionsArgs) {
         return this.http.delete(url, options);
     }
@@ -61,6 +64,29 @@ export class HttpService {
         }
     	return this.post(url, JSON.stringify(body), { headers: headers })
     		.map(res => res.json())
+            .catch(this.handleError);
+    }
+    /**
+     * Issue patch request with 'applicaton/json', and x-access-token header and
+     * return deserialized json response in observable.
+     *
+     * @param string url
+     *    Endpoint to issue request against.
+     * @param object body
+     *    An object to JSON.stringify and submit as body content.
+     * @param string token (optional)
+     *    The token to attach to authenticate api access.
+     *
+     * @example
+     */
+    patchSimple(url: string, body: any, token?: string) : Observable<any> {
+        var headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        if (token) {
+            headers.append('x-access-token', token);
+        }
+        return this.patch(url, JSON.stringify(body), { headers: headers })
+            .map(res => res.json())
             .catch(this.handleError);
     }
     /**

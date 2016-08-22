@@ -13,6 +13,7 @@ var userSchema = new Schema({
     },
     email: { type: String, unique: true, required: true, dropDups: true },
     password: { type: String, required: true },
+    image: { type: String },
     roles: [{ type: String, enum: ['admin', 'user'] }]
 });
 // Forst plain text passwords to be hashed.

@@ -32,7 +32,15 @@ export class RoutesUsersEditComponent implements OnInit {
         }
     }
     save() {
-        this.alerts.push({ type: 'error', message: 'Not implemented.' });
+        this.working = true;
+        this.userService.update(this.user)
+            .subscribe( 
+                user => {
+                    this.alerts.push({ type: 'success', message: 'Account information udpated.' });
+                },
+                err => this.alerts.push({ type: 'error', message: err }),
+                () => this.working = false
+            );
     }
     ngOnInit() {
         this.working = true;
