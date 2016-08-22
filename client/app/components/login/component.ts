@@ -10,9 +10,9 @@ import { AuthenticateService }	         from '../../services/authenticate/authen
     templateUrl: 'view.html',
     styleUrls: ['style.css'],
 })
-
 export class LoginComponent implements OnInit {
     @Input() alerts: AlertMessage[];
+    public options: Options = new Options();
 	name: string;
 	password: string;
     working: boolean = false;
@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
     	this.authService.authenticate(this.name, this.password)
 	    .subscribe(
 			token => {
-                this.authService.setToken(token);
+                this.authService.setToken(token).updateCurrentUser();
                 this.alerts.push({ type: 'success', message: 'Your are now logged in.' });
             },
 		    err => { this.alerts.push({ type: 'error', message: err }); },
@@ -30,5 +30,19 @@ export class LoginComponent implements OnInit {
 		);
     }
     ngOnInit() {
+    }
+};
+
+class Options {
+    display: OptionsDisplay
+    constructor() {
+        this.display = new OptionsDisplay();
+    }
+};
+
+class OptionsDisplay {
+    button: boolean;
+    constructor() {
+        this.button = true;
     }
 };

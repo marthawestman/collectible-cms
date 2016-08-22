@@ -8,7 +8,7 @@
 			<div class="col-xs-4">Password</div>
 			<div class="col-xs-8"><input type="password" name="password" [(ngModel)]="password" class="form-control" /></div>
 		</div>
-		<div class="row login">
+		<div *ngIf="options.display.button != false" class="row login">
 			<div class="col-xs-12">
 				<button (click)="logIn()" class="form-control">Login</button>
 			</div>

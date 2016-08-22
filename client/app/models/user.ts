@@ -23,3 +23,7 @@ export class User {
 		return this.hasRole('admin');
 	}
 }
+
+export class CurrentUser {
+	user: User;
+}

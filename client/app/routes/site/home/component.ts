@@ -1,8 +1,8 @@
-import { Component }	    from '@angular/core';
-import { OnInit }		    from '@angular/core';
-import { AlertMessage }     from '../../../models/alertMessage';
-import { User }				from '../../../models/user';
-import { UserService }		from '../../../services/user/user.service';
+import { Component }	                 from '@angular/core';
+import { OnInit }		                 from '@angular/core';
+import { AlertMessage }                  from '../../../models/alertMessage';
+import { User, CurrentUser }			 from '../../../models/user';
+import { AuthenticateService }           from '../../../services/authenticate/authenticate.service';
 
 @Component({
     moduleId: module.id,	
@@ -13,10 +13,10 @@ import { UserService }		from '../../../services/user/user.service';
 
 export class RoutesSiteHomeComponent implements OnInit {
 	alerts: AlertMessage[] = [];
-	currentUser: User = null;
-    constructor(private userService: UserService) {
+	currentUser: CurrentUser = null;
+    constructor(private authService: AuthenticateService) {
     }
     ngOnInit() {
-    	this.currentUser = this.userService.getCurrentUser();
+    	this.currentUser = this.authService.getCurrentUser();
     }
 };

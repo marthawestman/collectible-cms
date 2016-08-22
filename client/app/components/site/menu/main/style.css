@@ -59,3 +59,19 @@
 .cc-site-menu-main > .inner .menu > .menu-item ul.dropdown-menu {
 	font-size: inherit;
 }
+/**
+ * User drop down menu.
+ */
+.menu-item ul.dropdown-menu li a {
+	display: table;
+	width: 100%;
+	cursor: pointer;
+	padding-left: 0.5em;
+}
+.menu-item ul.dropdown-menu li a span {
+	display: table-cell;
+	vertical-align: middle;
+}
+.menu-item ul.dropdown-menu li a span.fa {
+	width: 1.75em;
+}

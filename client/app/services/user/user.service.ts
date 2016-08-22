@@ -1,13 +1,10 @@
-import { Injectable }	from '@angular/core';
-import { User }			from '../../models/user';
-import { HttpService }	from '../http/http.service';
-import { AuthenticateService }	from '../authenticate/authenticate.service';
-
-declare var jwt_decode: any;
+import { Injectable }	                 from '@angular/core';
+import { User, CurrentUser }			 from '../../models/user';
+import { HttpService }	                 from '../http/http.service';
 
 @Injectable()
 export class UserService {
-    constructor(private httpService: HttpService, private authService: AuthenticateService) { }
+    constructor(private httpService: HttpService) { }
     /**
      * Retrieve all users.
      *
@@ -83,17 +80,5 @@ export class UserService {
                     throw json.message;
                 return true; 
             });
-    }
-    getCurrentUser() : User {
-        var user: User = new User();
-        var token = localStorage.getItem('token');
-        if (typeof(token) != 'undefined' && token != null) {
-            var decoded = jwt_decode(token);
-            user._id = decoded._id;
-            user.email = decoded.email;
-            user.name = decoded.name;
-            user.roles = decoded.roles;
-        }
-        return user;
     }
 }

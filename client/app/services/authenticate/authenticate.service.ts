@@ -1,10 +1,19 @@
-import { Injectable }	from '@angular/core';
-import { Headers }		from '@angular/http';
-import { HttpService }	from '../http/http.service';
+import { Injectable }	                from '@angular/core';
+import { Headers }		                from '@angular/http';
+import { User, CurrentUser }            from '../../models/user';
+import { HttpService }	                from '../http/http.service';
+
+declare var jwt_decode: any;
 
 @Injectable()
 export class AuthenticateService {
-    constructor(private httpService: HttpService) { }
+    currentUser: CurrentUser = new CurrentUser();
+    constructor(private httpService: HttpService) { 
+        if (typeof(this.currentUser.user) == 'undefined' || this.currentUser.user == null) {
+            this.currentUser.user = new User ();
+        }
+        this.updateCurrentUser();
+    }
     /**
      * Request authentication and return JWT in observable.
      *
@@ -27,9 +36,30 @@ export class AuthenticateService {
     getToken() {
     	return localStorage.getItem('token');
     }
-    setToken(token: string) {
+    setToken(token: string) : AuthenticateService {
 		if (token) {
 			localStorage.setItem('token', token);
 		}
+        return this;
+    }
+    deleteToken() : AuthenticateService {
+        localStorage.removeItem('token');
+        return this;
+    }
+    updateCurrentUser() : AuthenticateService {
+        var token: string = this.getToken();
+        var user: User = new User();
+        if (typeof(token) != 'undefined' && token != null) {
+            var decoded = jwt_decode(token);
+            user._id = decoded._id;
+            user.email = decoded.email;
+            user.name = decoded.name;
+            user.roles = decoded.roles;
+        }
+        this.currentUser.user = user;
+        return this;
+    }
+    getCurrentUser() : CurrentUser {
+        return this.currentUser;
     }
 }

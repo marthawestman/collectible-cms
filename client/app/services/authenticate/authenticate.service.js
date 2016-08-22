@@ -9,10 +9,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var user_1 = require('../../models/user');
 var http_service_1 = require('../http/http.service');
 var AuthenticateService = (function () {
     function AuthenticateService(httpService) {
         this.httpService = httpService;
+        this.currentUser = new user_1.CurrentUser();
+        if (typeof (this.currentUser.user) == 'undefined' || this.currentUser.user == null) {
+            this.currentUser.user = new user_1.User();
+        }
+        this.updateCurrentUser();
     }
     /**
      * Request authentication and return JWT in observable.
@@ -40,6 +46,27 @@ var AuthenticateService = (function () {
         if (token) {
             localStorage.setItem('token', token);
         }
+        return this;
+    };
+    AuthenticateService.prototype.deleteToken = function () {
+        localStorage.removeItem('token');
+        return this;
+    };
+    AuthenticateService.prototype.updateCurrentUser = function () {
+        var token = this.getToken();
+        var user = new user_1.User();
+        if (typeof (token) != 'undefined' && token != null) {
+            var decoded = jwt_decode(token);
+            user._id = decoded._id;
+            user.email = decoded.email;
+            user.name = decoded.name;
+            user.roles = decoded.roles;
+        }
+        this.currentUser.user = user;
+        return this;
+    };
+    AuthenticateService.prototype.getCurrentUser = function () {
+        return this.currentUser;
     };
     AuthenticateService = __decorate([
         core_1.Injectable(), 

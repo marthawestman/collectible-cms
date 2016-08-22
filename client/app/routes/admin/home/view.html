@@ -13,8 +13,8 @@
 			</div>
 			<div class="row welcome">
 				<div class="col-xs-12">
-					<div *ngIf="currentUser.isRegistered()">
-						Welcome {{ currentUser.name.first }}
+					<div *ngIf="currentUser.user.isRegistered()">
+						Welcome {{ currentUser.user.name.first }}
 					</div>
 				</div>
 			</div>

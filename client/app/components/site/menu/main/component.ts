@@ -1,7 +1,10 @@
-import { Component }       from '@angular/core';
-import { OnInit }          from '@angular/core';
-import { User }            from '../../../../models/user';
-import { UserService }     from '../../../../services/user/user.service';
+import { Component, ViewChild }			 from '@angular/core';
+import { OnInit }          				 from '@angular/core';
+import { Router }                        from '@angular/router';
+import { User, CurrentUser } 			 from '../../../../models/user';
+import { AlertMessage }                  from '../../../../models/alertMessage';
+import { AuthenticateService }           from '../../../../services/authenticate/authenticate.service';
+import { LoginComponent }                from '../../../../components/login/component';
 
 @Component({
 	moduleId: module.id,
@@ -11,12 +14,22 @@ import { UserService }     from '../../../../services/user/user.service';
 })
 
 export class SiteMenuMainComponent implements OnInit {
-	currentUser: User;
-    constructor(private userService: UserService) { }
+    @ViewChild(LoginComponent) loginComponent:LoginComponent;
+	currentUser: CurrentUser;
+    alerts: AlertMessage[] = [];
+    constructor(private authService: AuthenticateService, private router: Router ) { }
+    login() {
+        this.loginComponent.logIn();
+    }
     logout() {
-    	localStorage.removeItem('token');
+        this.authService.deleteToken().updateCurrentUser();
+    }
+    closeModal() {
+        // Close all alerts.
+        this.alerts = [];
     }
     ngOnInit() {
-    	this.currentUser = this.userService.getCurrentUser();
+        this.loginComponent.options.display.button = false;
+    	this.currentUser = this.authService.getCurrentUser();
     }
 };
