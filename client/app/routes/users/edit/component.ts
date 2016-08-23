@@ -4,17 +4,19 @@ import { User, CurrentUser }             from '../../../models/user';
 import { AlertMessage }                  from '../../../models/alertMessage';
 import { UserService }                   from '../../../services/user/user.service';
 import { AuthenticateService }           from '../../../services/authenticate/authenticate.service';
+import { SiteUploadComponent }           from '../../../components/site/upload/component';
 
 @Component({
     moduleId: module.id,
     selector: 'cc-routes-users-edit',
     templateUrl: 'view.html',
     styleUrls: ['style.css'],
+    directives: [ SiteUploadComponent ]
 })
 
 export class RoutesUsersEditComponent implements OnInit {
-    currentUser: CurrentUser;
 	alerts: AlertMessage[] = [];
+    currentUser: CurrentUser;
     working: boolean = false;
     loaded: boolean = false;
     userId: string;

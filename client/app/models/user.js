@@ -13,6 +13,7 @@ var User = (function () {
         this.password = (typeof (user.password) == 'undefined') ? this.password : user.password;
         this.roles = (typeof (user.roles) == 'undefined') ? this.roles : user.roles;
         this.name = (typeof (user.name) == 'undefined') ? this.name : user.name;
+        this.image = (typeof (user.image) == 'undefined') ? this.image : user.image;
         return this;
     };
     User.prototype.isRegistered = function () {

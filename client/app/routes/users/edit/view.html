@@ -34,6 +34,7 @@
 				<div class="row image">
 					<div class="col-xs-3">Profile Image</div>
 					<div class="col-xs-9">
+						<cc-site-upload [alerts]="alerts"></cc-site-upload>
 						<input type="text" [(ngModel)]="user.image" placeholder="http://" class="form-control">
 					</div>
 				</div>
