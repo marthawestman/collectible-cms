@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "concurrently \"npm run tsc:w\" ",
-    "postinstall": "typings install",
+    "postinstall": "typings install && npm run tsc",
     "tsc": "tsc",
     "tsc:w": "tsc -w",
     "typings": "typings"

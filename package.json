@@ -11,7 +11,8 @@
     "client_install": "cd client && npm install",
     "client_dev": "cd client && npm run dev",
     "server_dev": "nodemon server.js",
-    "dev": "concurrent \"npm run client_dev\" \"npm run server_dev\" \"npm run doc_update\" "
+    "dev": "concurrent \"npm run client_dev\" \"npm run server_dev\" \"npm run doc_update\" ",
+    "prod": "node server.js"
   },
   "author": "Bryan Hazelbaker",
   "license": "MIT",

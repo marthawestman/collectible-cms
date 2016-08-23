@@ -28,9 +28,10 @@ Edit config.js and apidoc.js, replacing the default values with more appropriate
 
 ### Launch the site in development mode
 
-* `npm run dev`
+* `npm run prod` or to launch in development mode: `npm run dev`
 
-By visiting http://localhost:8080 the default admin user will be created. Remember these credentials.
+By visiting http://localhost:8080 for the first time the default admin user
+will be created. Remember these credentials.
 
 ### Create and view the documentation
 
