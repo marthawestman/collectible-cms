@@ -5,6 +5,7 @@ export class User {
 	name: Name;
 	email: string;
 	password: string;
+	image: string;
 	roles: [ string ];
 	constructor(user?: User) {
 		this.name = new Name();
@@ -18,6 +19,7 @@ export class User {
 		this.password = (typeof(user.password) == 'undefined') ? this.password : user.password;
 		this.roles = (typeof(user.roles) == 'undefined') ? this.roles : user.roles;
 		this.name = (typeof(user.name) == 'undefined') ? this.name : user.name;
+		this.image = (typeof(user.image) == 'undefined') ? this.image : user.image;
 		return this
 	}
 	isRegistered(): boolean {
