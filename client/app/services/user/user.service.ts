@@ -22,6 +22,13 @@ export class UserService {
                 if (!json.status)
                     throw json.message;
                 return json.data; 
+            })
+            .map( (jsonUsers) => {
+                var users: User[] = [];
+                for (var i = 0; i < jsonUsers.length; i++) {
+                    users.push(new User(jsonUsers[i]));
+                }
+                return users;
             });
 	}
     /**
@@ -40,7 +47,7 @@ export class UserService {
             .map( (json) => { 
                 if (!json.status)
                     throw json.message;
-                return json.data; 
+                return new User(json.data);
             });
     }
     /**
@@ -59,7 +66,7 @@ export class UserService {
             .map( (json) => {
                 if (!json.status)
                     throw json.message;
-                return json.data
+                return new User(json.data);
             });
     }
     update(user: User) {
@@ -67,7 +74,7 @@ export class UserService {
             .map( (json) => {
                 if (!json.status)
                     throw json.message;
-                return json.data
+                return new User(json.data);
             });
     }
     /**

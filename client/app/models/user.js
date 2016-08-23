@@ -1,7 +1,20 @@
 "use strict";
+var name_1 = require('./name');
 var User = (function () {
-    function User() {
+    function User(user) {
+        this.name = new name_1.Name();
+        if (user != null) {
+            this.map(user);
+        }
     }
+    User.prototype.map = function (user) {
+        this._id = (typeof (user._id) == 'undefined') ? this._id : user._id;
+        this.email = (typeof (user.email) == 'undefined') ? this.email : user.email;
+        this.password = (typeof (user.password) == 'undefined') ? this.password : user.password;
+        this.roles = (typeof (user.roles) == 'undefined') ? this.roles : user.roles;
+        this.name = (typeof (user.name) == 'undefined') ? this.name : user.name;
+        return this;
+    };
     User.prototype.isRegistered = function () {
         if (this._id != null && this._id != "0") {
             return true;

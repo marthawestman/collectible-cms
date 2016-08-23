@@ -6,6 +6,20 @@ export class User {
 	email: string;
 	password: string;
 	roles: [ string ];
+	constructor(user?: User) {
+		this.name = new Name();
+		if (user != null) {
+			this.map(user);
+		}
+	}
+	map(user: User): User {
+		this._id = (typeof(user._id) == 'undefined') ? this._id : user._id;
+		this.email = (typeof(user.email) == 'undefined') ? this.email : user.email;
+		this.password = (typeof(user.password) == 'undefined') ? this.password : user.password;
+		this.roles = (typeof(user.roles) == 'undefined') ? this.roles : user.roles;
+		this.name = (typeof(user.name) == 'undefined') ? this.name : user.name;
+		return this
+	}
 	isRegistered(): boolean {
 		if (this._id != null && this._id != "0") {
 			return true;

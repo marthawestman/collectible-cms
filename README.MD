@@ -9,9 +9,18 @@ A Content Management System for stamps, coins, comic books, and other collectibl
 
 ## Installation
 
+Make sure you are running the lastest version of npm.
+
+* `npm install npm -g`
+
+Clone repository and install packages.
+
 * `git clone https://github.com/delphian/collectible-cms.git`
 * `cd collectible-cms`
 * `npm install`
+
+Customize token secret, port, and site domain.
+
 * `cp templates/config.js.sample ./config.js`
 * `cp templates/apidoc.json.sample ./apidoc.json`
 

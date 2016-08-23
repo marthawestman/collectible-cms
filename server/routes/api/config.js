@@ -1,5 +1,5 @@
 /**
- * @apiDefine apiGroupUser Config
+ * @apiDefine apiGroupConfig Config
  *
  * Site wide configuration variables. Generally this should be the first object loaded by the client.
  *

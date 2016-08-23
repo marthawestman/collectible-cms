@@ -27,7 +27,7 @@ var User = require('../../models/user');
 
 module.exports = function(app, router) {
     /**
-     * @api {get} /user Read all
+     * @api {get} /user Read All
      * @apiPermission apiPermissionRegistered
      * @apiGroup apiGroupUser
      * @apiName ReadAll
@@ -85,7 +85,7 @@ module.exports = function(app, router) {
         }
     });
     /**
-     * @api {get} /user/:id Read single
+     * @api {get} /user/:id Read One
      * @apiPermission apiPermissionAdmin
      * @apiGroup apiGroupUser
      * @apiName ReadSingle
@@ -189,6 +189,7 @@ module.exports = function(app, router) {
         if (!req.user.isAdmin()) {
             res.notAuthorized();
         } else {
+            delete req.body['_id'];
             var user = new User(req.body);
             user.save(function(err) {
                 if (err) {

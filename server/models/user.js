@@ -19,9 +19,10 @@ var userSchema = new Schema({
 // Forst plain text passwords to be hashed.
 userSchema.pre('save', function(next) {
     var user = this;
-    // only hash the password if it has been modified (or is new)
-    if (!user.isModified('password')) return next();
-    user.password = crypto.createHash('md5').update(user.password).digest("hex");
+    // Only hash the password if it has been modified (or is new)
+    if (user.isModified('password')) {
+        user.password = crypto.createHash('md5').update(user.password).digest("hex");
+    }
     next();
 });
 // Get full name.
