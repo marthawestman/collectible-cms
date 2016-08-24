@@ -6,3 +6,4 @@ apidoc.json
 /client/app/**/*.js
 /client/app/**/*.map
 .log
+/uploads

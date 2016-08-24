@@ -36,8 +36,9 @@ export class HttpService {
         return this.http.delete(url, options);
     }
     /**
-     * Issue post request with 'applicaton/json', and x-access-token header and
-     * return deserialized json response in observable.
+     * Serialize body and issue post request with 'applicaton/json', 
+     * and x-access-token header. Return deserialized json response
+     * in observable.
      *
      * @param string url
      *    Endpoint to issue request against.
@@ -67,8 +68,50 @@ export class HttpService {
             .catch(this.handleError);
     }
     /**
-     * Issue patch request with 'applicaton/json', and x-access-token header and
+     * Issue post request with 'multipart/form-data', and x-access-token header and
      * return deserialized json response in observable.
+     *
+     * @param string url
+     *    Endpoint to issue request against.
+     * @param object body
+     *    An object to JSON.stringify and submit as body content.
+     * @param string token (optional)
+     *    The token to attach to authenticate api access.
+     *
+     * @example
+     */
+    postFile(url: string, body: FormData, token?: string) : Observable<any> {
+        // let observable: Observable<any> = Observable.create(observable => {
+        //     var xhr = new XMLHttpRequest();
+        //     xhr.onreadystatechange = function () {
+        //         if (xhr.readyState == 4) {
+        //             if (xhr.status == 200) {
+        //                 observable.onNext(JSON.parse(xhr.response));
+        //                 observable.onComplete();
+        //             } else {
+        //                 throw xhr.response;
+        //             }
+        //         }
+        //     }
+        //     xhr.open("POST", url, true);
+        //     xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');            
+        //     xhr.setRequestHeader("x-access-token", token);
+        //     xhr.send(body);
+        //     return () => { };
+        // });
+        // return observable;
+        var headers = new Headers();
+        if (token) {
+            headers.append('x-access-token', token);
+        }
+        return this.post(url, body, { headers: headers })
+            .map(res => res.json())
+            .catch(this.handleError);
+    }
+    /**
+     * Serialize body and issue patch request with 'applicaton/json', 
+     * and x-access-token header. Return deserialized json response
+     * in observable.
      *
      * @param string url
      *    Endpoint to issue request against.

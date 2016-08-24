@@ -1,3 +1,9 @@
+var busboy = require('connect-busboy');
+var fs     = require('fs');
+var User   = require('../../models/user');
+var File   = require('../../models/file');
+var config = require('../../../config');
+
 /**
  * @apiDefine apiGroupFile File
  *
@@ -13,9 +19,6 @@
  * }
  * </pre>
  */
-
-var User = require('../../models/user');
-var File = require('../../models/file');
 
 module.exports = function(app, router) {
     /**
@@ -126,20 +129,48 @@ module.exports = function(app, router) {
         if (!req.user.isUser()) {
             res.notAuthorized();
         } else {
-            var file = new File();
-            throw 'Not implemented';
-            // Recieve file and copy to final destination.
-            // Assign file properties.
-            File.save(function(err) {
-                if (err) {
-                    res.failure(err);
-                } else {
-                    res.json({
-                        "status": true,
-                        "data": file
+            if (req.busboy) {
+                req.pipe(req.busboy);       
+                req.busboy.on('file', function (fieldname, file, filename) {
+                    var reportErr = function(err) {
+                        res.failure(err)
+                    };
+                    var saveFile = function(path, file, filename) {
+                        fstream = fs.createWriteStream(path);
+                        file.pipe(fstream);
+                        fstream.on('close', function () {
+                            var file = new File();
+                            file.name = filename;
+                            file.path = path;
+                            file.url  = config.uploadPath + '/' + req.params.id + '/' + filename;
+                            file.save(function(err) {
+                                if (err) {
+                                    res.failure(err);
+                                } else {
+                                    res.json({
+                                        "status": true,
+                                        "data": file
+                                    });
+                                }
+                            });
+                            console.log('all done!!!');
+                        });
+                    };
+                    var dir = config.rootPath + '/' + config.uploadPath + '/' + req.params.id;
+                    var path = dir + '/' + filename;
+                    fs.mkdir(dir, 0777, function(err) {
+                        if (err) {
+                            // Ignore the error if the folder already exists.
+                            if (err.code == 'EEXIST')
+                                saveFile(path, file, filename) 
+                            else
+                                reportErr(err);
+                        } else {
+                            saveFile(path, file, filename);
+                        }
                     });
-                }
-            });
+                });
+            }
         }
     });
     /**

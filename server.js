@@ -4,8 +4,9 @@ var app        = express();
 var bodyParser = require('body-parser');
 var morgan     = require('morgan');
 var mongoose   = require('mongoose');
-var jwt        = require('jsonwebtoken'); // used to create, sign, and verify tokens
-var config     = require('./config'); // get our config file
+var jwt        = require('jsonwebtoken');
+var	busboy     = require('connect-busboy');
+var config     = require('./config');
 
 // Should we put these into app.set for a poor man's dependency injection?
 var User                = require('./server/models/user');
@@ -20,9 +21,14 @@ mongoose.connect(config.database);
 app.set('tokenSignature', config.tokenSignature);
 
 // Use body parser so we can get info from POST and/or URL parameters
+app.use(busboy({
+    highWaterMark: 2 * 1024 * 1024,
+    limits: {
+        fileSize: 10 * 1024 * 1024
+    }
+}));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
 // Use morgan to log requests to the console
 app.use(morgan('dev'));
 

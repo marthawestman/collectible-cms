@@ -6,41 +6,43 @@ import { User, CurrentUser } 			 from '../../../models/user';
 import { AlertMessage }                  from '../../../models/alertMessage';
 import { AuthenticateService }           from '../../../services/authenticate/authenticate.service';
 import { HttpService }                   from '../../../services/http/http.service';
+import { FileService }                   from '../../../services/file/file.service';
 
 @Component({
 	moduleId: module.id,
     selector: 'cc-site-upload',
     templateUrl: 'view.html',
     styleUrls: ['style.css'],
+    providers: [ FileService ]
 })
 export class SiteUploadComponent implements OnInit {
     @Input() alerts: AlertMessage[];
-    files: File[];
+    file: File;
 	currentUser: CurrentUser;
     working: boolean = false;
     loaded: boolean = false;
-    constructor(private authService: AuthenticateService, private httpService: HttpService) { 
+    constructor(private authService: AuthenticateService, private fileService: FileService) { 
         this.currentUser = this.authService.getCurrentUser();
     }
     fileChange(fileInput: any) {
-        this.files = <Array<File>> fileInput.target.files;
+console.log(fileInput.target);        
+        this.file = fileInput.target.files[0];
+console.log(this.file);        
     }
     save() {
-        let url: string = 'api/v1/file';
+        this.working = true;
         let formData: FormData = new FormData();
-        for (var i = 0; i < this.files.length; i++) {
-            formData.append("uploads[]", this.files[i], this.files[i].name);
-        }
-        this.httpService.postSimple(url, formData, this.authService.getToken()).subscribe(
-            res => {
-                this.alerts.push({ type: 'success', message: res });
-                console.log(res);
+        formData.append("file", this.file);
+        this.fileService.create(this.currentUser.user, formData).subscribe(
+            file => {
+                this.alerts.push({ type: 'success', message: 'File uploaded.' });
+                console.log(file);
             },
             err => {
                 this.alerts.push({ type: 'error', message: err });
                 console.log(err);
             },
-            () => { }
+            () => { this.working = false; }
         );
 
     }
